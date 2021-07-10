@@ -1,0 +1,17 @@
+{% extends 'list.html' %}
+
+{% load  static %}
+
+{% block page_title %}{{ saludo }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group">
+                {% for sede in sedes %}
+                    <li class="list-group-item">{{ sede }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}s

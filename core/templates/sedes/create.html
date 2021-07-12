@@ -1,17 +1,60 @@
 {% extends 'home.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 
-{% block page_title %}{{ saludo }}{% endblock %}
 
 {% block content %}
+    <div class="position-relative    container-fluid"></div>
     <form action="." method="post">
         {% csrf_token %}
+        <input type="hidden" value="{{ action }}"  name="action">
+        {% if form.erros %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Alerta! </h5>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
         <div class="form-group">
-            <label>{{ form.label.ubicacion }}</label>
-            {{ form }}
+            {{ form.errors }}
+            {% for field in form.visible_fields %}
+                <label>{{ field.label }}</label>
+                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+            {% endfor %}
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            var formdata = $(this).serializeArray();
+            $.ajax({
+                url: {%  url 'sede_create_view' %},
+                type: "POST",
+                data: formdata
+            })
+                .done(function (data) {
+                    alert("guardado");
+                })
+                .fail(function (data) {
+                    alert("error");
+                })
+                .always(function (data) {
+                    alert("complete");
+                });
+        });
+    </script>
 {% endblock %}

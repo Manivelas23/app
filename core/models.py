@@ -2,6 +2,8 @@ from django.db import models
 
 
 # modelos para las tablas de la base de datos
+from django.forms import model_to_dict
+
 
 class tipo_identificacion(models.Model):
     identificacion = models.IntegerField(
@@ -104,8 +106,12 @@ class sede(models.Model):
     def __str__(self):
         return self.ubicacion
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
     class Meta:
-        ordering = ["ubicacion"]
+        ordering = ["id"]
         verbose_name = "Sede"
         verbose_name_plural = "Sedes"
 

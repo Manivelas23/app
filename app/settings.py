@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # lib
+    'widget_tweaks',
+    # app
     'core.apps.CoreConfig',
 ]
 
@@ -63,6 +66,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     # configurando 'POSTGRESQL' como la base de datos por defecto
+    # Hosting Account ID: cosevi-001
+    # First Website Root Folder Name: cosevi1
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'db',
@@ -95,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ec'
 
 TIME_ZONE = 'UTC'
 

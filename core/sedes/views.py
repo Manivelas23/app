@@ -49,20 +49,12 @@ class SedeCreateView(CreateView):
 
     def post(self, request, *args, **kwargs):
         data = {}
-        try:
-            action = request.POST['action']
-            if action == 'agregar':
-                form = SedeForm(request.POST)
-                if form.is_valid():
-                    form.save()
-                else:
-                    data = ''
-            self.object = None
-            context = self.get_context_data(**kwargs)
-            context['form'] = form
-        except Exception as e:
-            context['error'] = str(e)
-        return render(request, self.template_name, context)
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+        else:
+            data = 'Ha ocurrido un error'
+        return JsonResponse(data)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

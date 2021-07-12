@@ -47,7 +47,7 @@
                 data: formdata
             })
                 .done(function (data) {
-                    alert("guardado");
+                   window.location.href = {% url 'sede_list_view' %};
                 })
                 .fail(function (data) {
                     alert("error");

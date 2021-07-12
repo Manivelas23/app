@@ -8,24 +8,9 @@
     <div class="position-relative    container-fluid"></div>
     <form action="." method="post">
         {% csrf_token %}
-        <input type="hidden" value="{{ action }}"  name="action">
-        {% if form.erros %}
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h5><i class="icon fas fa-ban"></i> Alerta! </h5>
-                <ul>
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-
+        <input type="hidden" value="{{ action }}" name="action">
 
         <div class="form-group">
-            {{ form.errors }}
             {% for field in form.visible_fields %}
                 <label>{{ field.label }}</label>
                 {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
@@ -42,12 +27,16 @@
             e.preventDefault();
             var formdata = $(this).serializeArray();
             $.ajax({
-                url: {%  url 'sede_create_view' %},
-                type: "POST",
-                data: formdata
+                url: '{%  url 'sede_create_view' %}',
+                type: 'POST',
+                data: formdata,
+                dataType:'json'
             })
                 .done(function (data) {
-                   window.location.href = {% url 'sede_list_view' %};
+                    if (!data.hasOwnProperty('error')) {
+                        window.location.href = '{{ sede_list }}';
+                        return false;
+                    }
                 })
                 .fail(function (data) {
                     alert("error");

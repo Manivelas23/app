@@ -7,7 +7,7 @@ class SedeForm(ModelForm):
         model = sede
         fields = '__all__'
         labels = {
-            'ubicacion':'Ingrese la ubicación de la sede'
+            'ubicacion':'Ingrese la ubicación de la sede:'
         }
 
 

@@ -1,5 +1,4 @@
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -63,21 +62,6 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#
-# DATABASES = {
-#     # configurando 'POSTGRESQL' como la base de datos por defecto
-#     # Hosting Account ID: cosevi-001
-#     # First Website Root Folder Name: cosevi1
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'db',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Kittyvox2021',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-#
-# }
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.mysql',

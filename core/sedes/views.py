@@ -12,8 +12,11 @@ from core.models import sede
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 class SedeListView(ListView):
 =======
+=======
+>>>>>>> Stashed changes
 class SedeListView(TemplateView):
 >>>>>>> Stashed changes
     model = sede
@@ -48,6 +51,7 @@ class SedeListView(TemplateView):
         return context
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 class SedeCreateView(CreateView):
     model = sede
@@ -75,6 +79,8 @@ class SedeCreateView(CreateView):
         context['accion'] = 'agregar'
         return context
 =======
+=======
+>>>>>>> Stashed changes
 # Clasico - Sirve
 # class SedeListView(ListView):
 #     model = sede
@@ -162,4 +168,7 @@ class SedeCreateView(CreateView):
 #         context['sede_list'] = self.success_url
 #         context['accion'] = 'agregar'
 #         return context
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

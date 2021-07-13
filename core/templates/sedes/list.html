@@ -21,8 +21,59 @@
             </table>
         </div>
     </div>
+<<<<<<< Updated upstream
 {% endblock %}
 
 {% block js %}
     <script src="{% static 'sedes/list.js' %}"></script>
 {% endblock js %}
+=======
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ modal_title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" value="agregar" name="accion">
+
+                        <div class="form-group">
+                            {% for field in form.visible_fields %}
+                                <label>{{ field.label }}</label>
+                                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+                            {% endfor %}
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar </button>
+                            <button type="submit" class="btn btn-success submit-btn">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'sedes/list.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+    <script type="application/javascript">
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            var form = new FormData(this);
+            var ruta_destino = window.location.pathname
+            var ruta_redirecion = ruta_destino
+            enviarConAjax(form, ruta_destino, ruta_redirecion)
+        });
+    </script>
+{% endblock js %}
+
+>>>>>>> Stashed changes

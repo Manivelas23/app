@@ -8,7 +8,7 @@ $(function () {
             ajax: {
                 url: window.location.pathname,
                 type: 'POST',
-                data: {},
+                data: {'accion':'obtener_sedes'},
                 dataSrc: ""
             },
             columns: [

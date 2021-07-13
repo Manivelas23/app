@@ -9,6 +9,7 @@ function enviarConAjax(form, ruta_destino) {
         dataType: 'json'
     }).done(function (data) {
         if (!data.hasOwnProperty('error')) {
+
             $('#exampleModal').modal('hide')
             cargarTabla();
         } else {

@@ -48,7 +48,6 @@ $(function () {
         data = Object.assign(data, {'accion': 'eliminar'})
 
         var form = new FormData();
-
         for (var key in data) {
             form.append(key, data[key]);
         }
@@ -56,4 +55,11 @@ $(function () {
         var ruta_destino = window.location.pathname
         enviarConAjax(form, ruta_destino)
     })
+
+    $('#exampleModal').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+        $('.div-error').hide();
+    })
+
 });
+

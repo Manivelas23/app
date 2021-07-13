@@ -1,4 +1,5 @@
 $(function () {
+    // datatables con ajax que trae todas las sedes
     $(document).ready(function () {
         $('.table').DataTable({
             responsive: true,
@@ -17,11 +18,11 @@ $(function () {
                 {data: null},
             ],
             columnDefs: [{
+                targets: [-1],
                 "orderable": false,
-                targets:[-1],
                 class: 'text-center',
-                render: function (data, type, row,meta) {
-                        var botones = '<button type="button" id="editarBtn" class="btn btn-warning" > Editar </button> ';
+                render: function (data, type, row, meta) {
+                    var botones = '<button type="button" id="editarBtn" class="btn btn-warning" > Editar</button> ';
                     botones += '<button type="button" id="borrarBtn" class="btn btn-danger"> <i class="far fa-trash-alt"></i></button>';
                     return botones;
                 }
@@ -29,3 +30,4 @@ $(function () {
         })
     });
 });
+

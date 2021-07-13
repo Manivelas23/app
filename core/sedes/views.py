@@ -11,17 +11,11 @@ from .forms import SedeForm
 from core.models import sede
 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-class SedeListView(ListView):
-=======
-=======
->>>>>>> Stashed changes
 class SedeListView(TemplateView):
->>>>>>> Stashed changes
     model = sede
     template_name = 'sedes/list.html'
     context_object_name = 'sedes'
+    form_class = SedeForm
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -48,39 +42,10 @@ class SedeListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Listado Sedes'
         context['page_info'] = 'Sedes'
+        context['form'] = SedeForm()
+        context['modal_title'] = 'Formulario Crear Sede'
         return context
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-class SedeCreateView(CreateView):
-    model = sede
-    template_name = 'sedes/create.html'
-    form_class = SedeForm
-    success_url = reverse_lazy('sede_list_view')
-
-    def post(self, request, *args, **kwargs):
-        data = {}
-        try:
-            form = self.get_form()
-            if form.is_valid():
-                form.save()
-            else:
-                data = form.errors
-        except Exception as e:
-            data['error'] = str(e)
-        return JsonResponse(data)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = 'Agregar Sede'
-        context['page_info'] = 'Sedes'
-        context['sede_list'] = self.success_url
-        context['accion'] = 'agregar'
-        return context
-=======
-=======
->>>>>>> Stashed changes
 # Clasico - Sirve
 # class SedeListView(ListView):
 #     model = sede
@@ -168,7 +133,3 @@ class SedeCreateView(CreateView):
 #         context['sede_list'] = self.success_url
 #         context['accion'] = 'agregar'
 #         return context
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes

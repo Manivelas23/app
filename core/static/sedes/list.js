@@ -23,7 +23,7 @@ function cargarTabla() {
             class: 'text-center',
             render: function (data, type, row, meta) {
                 var botones = '<a rel="editar" class="btn btn-warning" > Editar </a> ';
-                botones += '<a  rel="eliminar" class="btn btn-danger"> <i class="far fa-trash-alt"></i></a>';
+                botones += '<a rel="eliminar" class="btn btn-danger"> <i class="far fa-trash-alt"></i></a>';
                 return botones;
             }
         }],
@@ -62,4 +62,3 @@ $(function () {
     })
 
 });
-

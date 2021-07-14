@@ -3,14 +3,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <!-- bootstrap v5-->
     <link rel="stylesheet" href="{% static 'lib/bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
     <script src="{% static 'lib/bootstrap-5.0.2-dist/js/bootstrap.min.js' %}"></script>
+
+    <!-- AdminLT3 -->
     <link rel="stylesheet" href="{% static 'lib/AdminLTE/css/adminlte.min.css' %}">
     <script src="{% static 'lib/AdminLTE/js/adminlte.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'lib/AdminLTE/plugins/fontawesome-free/css/all.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="{% static  'lib/DataTables/datatables.css' %}">
+
+    <!-- jAlert v4 -->
+    <link rel="stylesheet" type="text/css" href="{% static  'lib/jAlert/jAlert.css' %}">
+
 
     <title>{{ page_title }}</title>
 
@@ -58,10 +70,22 @@
     </div>
 </footer>
 
+<!-- Jquery -->
 <script src="{% static '/lib/AdminLTE/plugins/jquery/jquery.min.js' %}"></script>
+
+<!-- bootstrap v5-->
 <script src="{% static '/lib/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- AdminLT3 -->
 <script type="text/javascript" charset="utf8" src="{% static '/lib/AdminLTE/js/adminlte.min.js' %}"></script>
+
+<!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="{% static 'lib/DataTables/datatables.js' %}"></script>
+
+<!-- jAlert -->
+<script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert.min.js' %}"></script>
+<script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert-functions.min.js' %}"></script>
+
 {% block js %} {% endblock js %}
 </body>
 </html>

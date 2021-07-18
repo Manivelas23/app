@@ -1,8 +1,5 @@
 {% load static %}
-<div class="preloader flex-column justify-content-center align-items-center bg-white">
-     <img src="{% static 'img/cargando.gif' %}" alt="DGEV Logo" class="animation__shake"
-             style="height:25vh; width: 25%;">
-</div>
+
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -68,7 +65,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{% url 'fecha_list_view' %}" class="nav-link">
                     <i class="nav-icon fas fa-calendar-check"></i>
                     <p>
                         Fechas Disponibles

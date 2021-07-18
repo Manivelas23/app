@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # modelos para las tablas de la base de datos
 from django.forms import model_to_dict
 
@@ -129,6 +128,14 @@ class fecha(models.Model):
         on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return self.fecha_disponible
+
+    class Meta:
+        ordering = ["fecha_disponible"]
+        verbose_name = "fecha"
+        verbose_name_plural = "fechas"
+
 
 class cita(models.Model):
     # se hace un llamado a la tabla tipo_identificacion en vez de la persona
@@ -152,3 +159,11 @@ class cita(models.Model):
         max_length=450,
         null=True,
         blank=False)
+
+    def __str__(self):
+        return self.id
+
+    class Meta:
+        ordering = ["id"]
+        verbose_name = "cita"
+        verbose_name_plural = "citas"

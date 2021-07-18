@@ -9,13 +9,17 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, CreateView
 from .forms import SedeForm
 from core.models import sede
+from django.db import models
 
 
 class SedeListView(TemplateView):
     model = sede
-    template_name = 'sedes/list.html'
+    template_name = 'sedes/sede_list.html'
     context_object_name = 'sedes'
     form_class = SedeForm
+
+    simple_field_names = [field.name for field in sede._meta.get_fields()
+                          if not isinstance(field,(models.ForeignKey,models.ManyToOneRel,models.ManyToManyRel))]
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -32,13 +36,13 @@ class SedeListView(TemplateView):
             if request.POST['accion'] == 'agregar':
                 obj_sede = sede()
                 obj_sede.ubicacion = request.POST['ubicacion']
-                obj_sede.ubicacion = obj_sede.ubicacion.capitalize()
+                obj_sede.ubicacion = obj_sede.ubicacion.title()
                 obj_sede.save()
 
             if request.POST['accion'] == 'editar':
                 obj_sede = sede.objects.get(pk=request.POST['id'])
                 obj_sede.ubicacion = request.POST['ubicacion']
-                obj_sede.ubicacion = obj_sede.ubicacion.capitalize()
+                obj_sede.ubicacion = obj_sede.ubicacion.title()
                 obj_sede.save()
 
             if request.POST['accion'] == 'eliminar':
@@ -54,6 +58,7 @@ class SedeListView(TemplateView):
         context['page_title'] = 'Listado Sedes'
         context['page_info'] = 'Sedes'
         context['form'] = SedeForm()
+        context['table_content'] = self.simple_field_names
         context['modal_title'] = 'Formulario Sede'
         context['agregar_title'] = "Agregar una Nueva Sede"
         return context

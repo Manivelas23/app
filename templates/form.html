@@ -2,21 +2,23 @@
 {% load  static %}
 {% load widget_tweaks %}
 
-{% block page_title %}{{ page_title }}{% endblock %}
 
 {% block content %}
     <div class="card">
         <div class="card-body d-grid gap-4">
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-lg btn-primary" id="modal_trigger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-lg btn-primary" id="modal_trigger" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
                 {{ agregar_title }}
             </button>
+
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Ubicación</th>
+                    {% for table_items in  table_content %}
+                        <th scope="col"> {{ table_items }}</th>
+                    {% endfor %}
                     <th scope="col"> Acciones</th>
                 </tr>
                 </thead>
@@ -26,7 +28,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -41,12 +42,12 @@
                         <input type="hidden" value="agregar" name="accion">
                         <input type="hidden" id="id" value="0" name="id">
 
-                        <div class="form-group">
-                            {% for field in form.visible_fields %}
-                                <label>{{ field.label }}</label>
-                                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
-                            {% endfor %}
+                        <div class="form-group container-fluid gap-3">
+                            {% block form %}
+
+                            {% endblock form %}
                         </div>
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -54,23 +55,13 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
 {% endblock content %}
 
 {% block js %}
-    <script src="{% static 'sedes/list.js' %}"></script>
-    <script src="{% static 'js/enviar_ajax.js' %}"></script>
-    <script type="application/javascript">
-        $('form').on('submit', function (e) {
-            e.preventDefault();
-            console.log()
-            var form = new FormData(this);
-            var ruta_destino = window.location.pathname
-            enviarConAjax(form, ruta_destino)
-        });
-    </script>
+
 {% endblock js %}
+
 

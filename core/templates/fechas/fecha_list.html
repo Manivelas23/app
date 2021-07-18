@@ -1,0 +1,49 @@
+{% extends 'form.html' %}
+{% load  static %}
+{% load widget_tweaks %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block form %}
+
+    <label for="exampleInputEmail1" class="form-label">INGRESE LA FECHA DE INICIO PARA GENERAR LAS CITAS</label>
+    <input class="form-control" type="text" id="date_timepicker_start">
+    <label for="exampleInputEmail1" class="form-label">INGRESE LA FECHA FINAL PARA GENERAR LAS CITAS</label>
+    <input class="form-control" type="text" id="date_timepicker_end">
+
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck2">Checkbox 2</label>
+
+        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck3">Checkbox 3</label>
+    </div>
+{% endblock form %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('#date_timepicker_start').datetimepicker({
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: $('#date_timepicker_end').val() ? $('#date_timepicker_end').val() : false
+                    })
+                },
+                timepicker: true
+            });
+            $('#date_timepicker_end').datetimepicker({
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: $('#date_timepicker_start').val() ? $('#date_timepicker_start').val() : false
+                    })
+                },
+                timepicker: true
+            });
+        });
+    </script>
+{% endblock js %}
+
+

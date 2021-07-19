@@ -32,6 +32,8 @@ function seleccionar_sedes() {
             activado = true
         }
     });
+    var reset_sedes = [$(".btn-check").prop('disabled', false), $(".btn-check").prop('checked', false).parent().addClass('active')]
+    return reset_sedes;
 }
 
 function obtener_sedes() {
@@ -39,6 +41,7 @@ function obtener_sedes() {
     $("form").submit(function (event) {
         event.preventDefault();
         sedes_seleccinadas = $('.sedes-btn:checkbox:checked');
+        seleccionar_sedes()
         console.log(sedes_seleccinadas)
     });
     return sedes_seleccinadas;

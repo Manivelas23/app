@@ -5,8 +5,6 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block form %}
-
-
     <div class="mb-3">
         <label class="form-label">INGRESE LA FECHA DE INICIO PARA GENERAR LAS CITAS:</label>
         <input class="form-control" type="text" id="date_timepicker_start" autocomplete="off">
@@ -17,6 +15,7 @@
         <input class="form-control" type="text" id="date_timepicker_end" autocomplete="off">
     </div>
 
+
 {% endblock form %}
 
 {% block sedes_fechas %}
@@ -25,7 +24,7 @@
             <label class="form-label">SELECCIONE LAS SEDES PARA APLICAR LAS FECHAS DE LAS CITAS:</label>
         </div>
         <div class="mb-3">
-            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+            <input class="form-check-input selecciona-todas-sedes" type="checkbox" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
                 Seleccionar todas las sedes
             </label>
@@ -34,7 +33,7 @@
 
         <div class="mb-3" id="sedes-fecha-div">
             {% for sede in  sedes %}
-                <input type="checkbox" class="btn-check" id="btncheck{{ forloop.counter }}" value="{{ sede }}"
+                <input type="checkbox" class="btn-check sedes-btn" id="btncheck{{ forloop.counter }}" value="{{ sede }}"
                        autocomplete="off">
                 <label class="btn btn-outline-primary" for="btncheck{{ forloop.counter }}"> {{ sede }}</label>
             {% endfor %}
@@ -42,46 +41,31 @@
     </div>
 {% endblock %}
 
+
+{% block form_footer %}
+    <div class="modal-footer position-relative">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success submit-btn" id="modal-close-btn">Aceptar</button>
+    </div>
+{% endblock %}
+
 {% block js %}
+    <script src="{% static 'fecha/fecha.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
     <script>
-        function seleccionar_sedes() {
-            activado = false
-            $('#flexCheckDefault').on('click', function () {
-                if (activado == false) {
-                    $(".btn-check").prop('disabled', true);
-                    $(".btn-check").prop('checked', true).parent().addClass('active');
-                    activado = true
-                } else {
-                    $(".btn-check").prop('disabled', false);
-                    $(".btn-check").prop('checked', false).parent().addClass('active');
-                    activado = false
-                }
-            });
-        }
-
-
         $(function () {
 
             //datetime inputs settings
-            $('#date_timepicker_start').datetimepicker({
-                onShow: function () {
-                    this.setOptions({
-                        maxDate: $('#date_timepicker_end').val() ? $('#date_timepicker_end').val() : false
-                    })
-                },
-                timepicker: true
-            });
-            $('#date_timepicker_end').datetimepicker({
-                onShow: function () {
-                    this.setOptions({
-                        minDate: $('#date_timepicker_start').val() ? $('#date_timepicker_start').val() : false
-                    })
-                },
-                timepicker: true
-            });
+            datetimepicker_settings();
 
             //checkbox settings
             seleccionar_sedes();
+
+            obtener_sedes();
+
+            $('#exampleModal').on('hidden.bs.modal', function () {
+                $(this).find('form').trigger('reset');
+            })
 
         });
     </script>

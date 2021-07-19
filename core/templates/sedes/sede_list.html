@@ -11,6 +11,12 @@
     {% endfor %}
 {% endblock form %}
 
+{% block form_footer %}
+    <div class="modal-footer position-relative">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success submit-btn">Aceptar</button>
+    </div>
+{% endblock %}
 
 {% block js %}
     <script src="{% static 'sedes/list.js' %}"></script>

@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, CreateView
 from .forms import FechaForm
 from core.models import fecha
+from core.models import sede
 from django.db import models
 
 class FechaListView(ListView):
@@ -37,7 +38,7 @@ class FechaListView(ListView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Listado Fechas'
         context['page_info'] = 'Fechas Disponibles'
-        context['form'] = FechaForm()
+        context['sedes'] = sede.objects.all()
         context['table_content'] = self.simple_field_names
         context['agregar_title'] = "Agregar una Nueva Fecha"
         return context

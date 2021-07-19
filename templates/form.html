@@ -37,19 +37,21 @@
                 </div>
                 <div class="modal-body form-container-card">
                     <div class="div-error"></div>
-                    <form action="." method="post" enctype="multipart/form-data">
+                    <form action="." method="post" class="container-fluid" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" value="agregar" name="accion">
                         <input type="hidden" id="id" value="0" name="id">
 
-                        <div class="form-group container-fluid gap-3">
+                        <div class="form-group container-fluid">
                             {% block form %}
 
                             {% endblock form %}
                         </div>
 
+                        {% block sedes_fechas %}
 
-                        <div class="modal-footer">
+                        {% endblock sedes_fechas %}
+                        <div class="modal-footer position-relative">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-success submit-btn">Aceptar</button>
                         </div>

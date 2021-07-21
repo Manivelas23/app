@@ -6,14 +6,16 @@
 
 {% block form %}
     <div class="mb-3">
-        <label class="form-label">INGRESE LA FECHA INICIAL PARA GENERAR LAS CITAS:</label>
+        <label class="form-label">INGRESE LA FECHA DE INICIO PARA GENERAR LAS CITAS:</label>
         <input class="form-control" type="text" id="date_timepicker_start" autocomplete="off">
     </div>
 
     <div class="mb-3">
-        <label class="form-label">INGRESE LA FECHA FINAL PARA GENERAR LAS CITAS:</label>
+        <label class="form-label">INGRESE LA FECHA FINAL PARA GENERAR LAS CITA:</label>
         <input class="form-control" type="text" id="date_timepicker_end" autocomplete="off">
     </div>
+
+
 {% endblock form %}
 
 {% block sedes_fechas %}
@@ -27,6 +29,7 @@
                 Seleccionar todas las sedes
             </label>
         </div>
+
 
         <div class="mb-3" id="sedes-fecha-div">
             {% for sede in  sedes %}

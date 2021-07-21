@@ -26,6 +26,7 @@
             e.preventDefault();
             var form = new FormData(this);
             var ruta_destino = window.location.pathname
+            console.log(ruta_destino)
             enviarConAjax(form, ruta_destino)
         });
     </script>

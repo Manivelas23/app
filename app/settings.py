@@ -1,4 +1,5 @@
 from pathlib import Path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -64,13 +65,14 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.mysql',
-        'NAME': 'db_a774d6_db',
-        'USER': 'a774d6_db',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_a774d6_cosevi',
+        'USER': 'a774d6_cosevi',
         'PASSWORD': 'Kittyvox2021',
-        'HOST': 'MYSQL5047.site4now.net',
+        'HOST': 'MYSQL5025.site4now.net',
         'PORT': '3306',
-    }
+    },
+
 }
 
 # Password validation

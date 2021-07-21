@@ -1,7 +1,6 @@
 import listview as listview
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
-
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -42,3 +41,5 @@ class FechaListView(ListView):
         context['table_content'] = self.simple_field_names
         context['agregar_title'] = "Agregar una Nueva Fecha"
         return context
+
+

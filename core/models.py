@@ -125,7 +125,12 @@ class fecha(models.Model):
 
     id_sede = models.ForeignKey(
         sede,
-        on_delete=models.CASCADE
+        on_delete=models.DO_NOTHING
+    )
+
+    id_prueba = models.ForeignKey(
+        prueba,
+        on_delete=models.DO_NOTHING
     )
 
     def __str__(self):

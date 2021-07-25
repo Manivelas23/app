@@ -14,7 +14,7 @@ from django.db import models
 
 class SedeListView(TemplateView):
     model = sede
-    template_name = 'sedes/sede_list.html'
+    template_name = 'sedes/sede.html'
     context_object_name = 'sedes'
     form_class = SedeForm
 

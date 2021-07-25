@@ -17,7 +17,6 @@ function datetimepicker_settings() {
     });
 };
 
-
 function seleccionar_sedes() {
     activado = false
 
@@ -45,6 +44,27 @@ function obtener_sedes() {
         console.log(sedes_seleccinadas)
     });
     return sedes_seleccinadas;
+}
+
+
+//TODO: AGREGAR EL SELECT DE PRUEBAS
+function select_pruebas(ruta_destino, accion) {
+    console.log(ruta_destino)
+    $('.select2').select2({
+        ajax: {
+            url: ruta_destino,
+            data: {
+                'accion': accion,
+                function(params) {
+                    var query = {
+                        search: params.term,
+                        type: 'public'
+                    }
+                    return query;
+                }
+            }
+        }
+    });
 }
 
 

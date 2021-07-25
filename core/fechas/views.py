@@ -12,7 +12,7 @@ from django.db import models
 
 class FechaListView(ListView):
     model = fecha
-    template_name = 'fechas/fecha_list.html'
+    template_name = 'fechas/fecha.html'
     context_object_name = 'fechas'
     form_class = FechaForm
 

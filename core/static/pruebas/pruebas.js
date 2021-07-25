@@ -34,6 +34,7 @@ function cargarTabla() {
 $(function () {
     cargarTabla()
 
+        //funcion para obtener el id del elemento y editarlo
         $('.table tbody').on('click', 'a[rel="editar"]', function () {
         var tr = tblSede.cell($(this).closest('td, li')).index();
         var data = tblSede.row(tr.row).data();
@@ -44,6 +45,7 @@ $(function () {
         $('#exampleModal').modal('show')
     });
 
+    //funcion para obtener el id del elemento y eliminarlo
     $('.table tbody').on('click', 'a[rel="eliminar"]', function () {
         var tr = tblSede.cell($(this).closest('td, li')).index();
         var data = tblSede.row(tr.row).data();

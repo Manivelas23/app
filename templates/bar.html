@@ -24,7 +24,7 @@
         <!-- User Settings Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown">
-            <i class="fas fa-user-cog"></i>
+                <i class="fas fa-user-cog"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header">Ajustes de Usuario</span>
@@ -34,7 +34,7 @@
                 {#            <span class="float-right text-muted text-sm">3 mins</span>#}
                 {#          </a>#}
                 <div class="dropdown-divider"></div>
-                <a  class="dropdown-item dropdown-footer">Cerrar Sesión</a>
+                <a class="dropdown-item dropdown-footer">Cerrar Sesión</a>
             </div>
         </li>
 
@@ -57,7 +57,7 @@
                  with font-awesome or any other icon font library -->
             <li class="nav-header">PANEL DE ADMINISTRACIÓN</li>
             <li class="nav-item">
-                <a href="{% url 'sede_list_view' %}" class="nav-link">
+                <a href="{% url 'SedeTemplateView' %}" class="nav-link">
                     <i class="nav-icon fas fa-map-marker-alt"></i>
                     <p>
                         Sedes
@@ -65,7 +65,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'fecha_list_view' %}" class="nav-link">
+                <a href="{% url 'FechaTemplateView' %}" class="nav-link">
                     <i class="nav-icon fas fa-calendar-check"></i>
                     <p>
                         Fechas Disponibles
@@ -79,6 +79,13 @@
                     <p>
                         Citas Matriculadas
                     </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{% url 'PruebaTemplateView' %}" class="nav-link">
+                    <i class="nav-icon fas fa-id-card"></i>
+                    <p>Pruebas</p>
                 </a>
             </li>
             <li class="nav-item">

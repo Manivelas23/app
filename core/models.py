@@ -29,7 +29,7 @@ class tipo_identificacion(models.Model):
 class prueba(models.Model):
     tipo_prueba = models.CharField(
         max_length=9,
-        unique=True,
+        unique=False,
         null=False,
         blank=False,
         verbose_name="tipo_prueba"
@@ -42,6 +42,10 @@ class prueba(models.Model):
         blank=False,
         verbose_name="tipo_licencia"
     )
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
 
     def __str__(self):
         return self.tipo_prueba

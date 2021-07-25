@@ -35,9 +35,9 @@ class SedeListView(TemplateView):
 
             if request.POST['accion'] == 'agregar':
                 obj_sede = sede()
+                obj_sede.save()
                 obj_sede.ubicacion = request.POST['ubicacion']
                 obj_sede.ubicacion = obj_sede.ubicacion.title()
-                obj_sede.save()
 
             if request.POST['accion'] == 'editar':
                 obj_sede = sede.objects.get(pk=request.POST['id'])
@@ -59,6 +59,5 @@ class SedeListView(TemplateView):
         context['page_info'] = 'Sedes'
         context['form'] = SedeForm()
         context['table_content'] = self.simple_field_names
-        context['modal_title'] = 'Formulario Sede'
         context['agregar_title'] = "Agregar una Nueva Sede"
         return context

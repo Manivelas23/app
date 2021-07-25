@@ -2,6 +2,7 @@
 {% load  static %}
 {% load widget_tweaks %}
 
+
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block form %}
@@ -9,7 +10,8 @@
         <label>{{ field.label }}</label>
         {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
     {% endfor %}
-{% endblock form %}
+{% endblock %}
+
 
 {% block form_footer %}
     <div class="modal-footer position-relative">
@@ -19,7 +21,7 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{% static 'sedes/sedes.js' %}"></script>
+    <script src="{% static 'pruebas/pruebas.js' %}"></script>
     <script src="{% static 'js/enviar_ajax.js' %}"></script>
     <script type="application/javascript">
         $('form').on('submit', function (e) {
@@ -29,5 +31,4 @@
             enviarConAjax(form, ruta_destino)
         });
     </script>
-{% endblock js %}
-
+{% endblock %}

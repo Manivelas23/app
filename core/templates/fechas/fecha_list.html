@@ -15,6 +15,11 @@
         <input class="form-control" type="text" id="date_timepicker_end" autocomplete="off">
     </div>
 
+    <div class="mb-3">
+        <select class="js-example-data-ajax form-control">
+            <option value="3620194" selected="selected">select2/select2</option>
+        </select>
+    </div>
 
 {% endblock form %}
 
@@ -50,10 +55,15 @@
 {% endblock %}
 
 {% block js %}
+
+
     <script src="{% static 'fecha/fecha.js' %}"></script>
     <script src="{% static 'js/enviar_ajax.js' %}"></script>
     <script>
         $(function () {
+
+            $('.js-example-data-ajax').select2();
+
 
             //datetime inputs settings
             datetimepicker_settings();

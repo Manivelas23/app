@@ -15,7 +15,6 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="{% static  'lib/DataTables/datatables.css' %}">
 
@@ -28,12 +27,19 @@
     <!-- Select2  -->
     <link rel="stylesheet" href="{% static 'lib/select2/select2.min.css' %}">
 
+
+    <style type="text/css">
+        .mydatatable {
+            min-width: 100%;
+            text-align: center;
+            padding: 2vh 0px;
+        }
+    </style>
     <title>{{ page_title }}</title>
 
 
 </head>
 <body>
-
 
 {% include 'bar.html' %}
 

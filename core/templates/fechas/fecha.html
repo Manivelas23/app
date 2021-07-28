@@ -15,9 +15,6 @@
         <input class="form-control" type="text" id="date_timepicker_end" autocomplete="off">
     </div>
 
-    <div class="mb-3">
-        <select class="form-control select2 js-data-example-ajax"></select>
-    </div>
 
 {% endblock form %}
 
@@ -45,13 +42,6 @@
 {% endblock %}
 
 
-{% block form_footer %}
-    <div class="modal-footer position-relative">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success submit-btn" id="modal-close-btn">Aceptar</button>
-    </div>
-{% endblock %}
-
 {% block js %}
 
 
@@ -59,8 +49,6 @@
     <script src="{% static 'js/enviar_ajax.js' %}"></script>
     <script>
         $(function () {
-
-            select_pruebas("{% url 'PruebaTemplateView' %}","obtener_pruebas");
 
 
             //datetime inputs settings

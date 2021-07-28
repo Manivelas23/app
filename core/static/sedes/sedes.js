@@ -1,11 +1,14 @@
 var tblSede;
 
 function cargarTabla() {
-    tblSede = $('.table').DataTable({
+    tblSede = $('.mydatatable').DataTable({
         responsive: true,
         autoWidth: false,
         destroy: true,
         deferRender: true,
+        fixedColumns: {
+            heightMatch: 'none'
+        },
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -22,8 +25,8 @@ function cargarTabla() {
             targets: [-1],
             class: 'text-center',
             render: function (data, type, row, meta) {
-                var botones = '<a rel="editar" class="btn btn-warning" > Editar </a> ';
-                botones += '<a rel="eliminar" class="btn btn-danger"> <i class="far fa-trash-alt"></i></a>';
+                var botones = '<a rel="editar" class="btn btn-warning btn-xs" >Modificar<span class="ml-1"></span><i class="far fa-edit"></i></a> ';
+                botones += '<a rel="eliminar" class="btn btn-danger btn-xs"> <i class="far fa-trash-alt"></i></a>';
                 return botones;
             }
         }],
@@ -33,7 +36,7 @@ function cargarTabla() {
 $(function () {
     cargarTabla();
 
-    $('.table tbody').on('click', 'a[rel="editar"]', function () {
+    $('.mydatatable tbody').on('click', 'a[rel="editar"]', function () {
         var tr = tblSede.cell($(this).closest('td, li')).index();
         var data = tblSede.row(tr.row).data();
         $('input[name="accion"]').val('editar')
@@ -42,7 +45,7 @@ $(function () {
         $('#exampleModal').modal('show')
     });
 
-    $('.table tbody').on('click', 'a[rel="eliminar"]', function () {
+    $('.mydatatable tbody').on('click', 'a[rel="eliminar"]', function () {
         var tr = tblSede.cell($(this).closest('td, li')).index();
         var data = tblSede.row(tr.row).data();
         data = Object.assign(data, {'accion': 'eliminar'})

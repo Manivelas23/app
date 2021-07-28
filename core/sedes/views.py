@@ -19,7 +19,7 @@ class SedeListView(TemplateView):
     form_class = SedeForm
 
     simple_field_names = [field.name for field in sede._meta.get_fields()
-                          if not isinstance(field,(models.ForeignKey,models.ManyToOneRel,models.ManyToManyRel))]
+                          if not isinstance(field, (models.ForeignKey, models.ManyToOneRel, models.ManyToManyRel))]
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -35,9 +35,8 @@ class SedeListView(TemplateView):
 
             if request.POST['accion'] == 'agregar':
                 obj_sede = sede()
+                obj_sede.ubicacion = str(request.POST['ubicacion']).title()
                 obj_sede.save()
-                obj_sede.ubicacion = request.POST['ubicacion']
-                obj_sede.ubicacion = obj_sede.ubicacion.title()
 
             if request.POST['accion'] == 'editar':
                 obj_sede = sede.objects.get(pk=request.POST['id'])

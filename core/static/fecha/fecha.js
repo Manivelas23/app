@@ -7,6 +7,7 @@ function datetimepicker_settings() {
         },
         timepicker: true
     });
+
     $('#date_timepicker_end').datetimepicker({
         onShow: function () {
             this.setOptions({
@@ -40,32 +41,23 @@ function obtener_sedes() {
     $("form").submit(function (event) {
         event.preventDefault();
         sedes_seleccinadas = $('.sedes-btn:checkbox:checked');
-        seleccionar_sedes()
-        console.log(sedes_seleccinadas)
+        seleccionar_sedes();
     });
     return sedes_seleccinadas;
-}
+};
 
 
 //TODO: AGREGAR EL SELECT DE PRUEBAS
 function select_pruebas(ruta_destino, accion) {
-    console.log(ruta_destino)
     $('.select2').select2({
         ajax: {
             url: ruta_destino,
             data: {
-                'accion': accion,
-                function(params) {
-                    var query = {
-                        search: params.term,
-                        type: 'public'
-                    }
-                    return query;
-                }
+                'accion': accion
             }
         }
-    });
-}
+    })
+};
 
 
 

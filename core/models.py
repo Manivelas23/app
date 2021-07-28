@@ -105,6 +105,18 @@ class sede(models.Model):
         unique=True,
         verbose_name="ubicacionSede"
     )
+    cant_supervisores = models.IntegerField(
+        default=0,
+        verbose_name="cantSupervisores"
+    )
+    cant_computadoras = models.IntegerField(
+        default=0,
+        verbose_name="cantComputadoras"
+    )
+    activo = models.BooleanField(
+        default=True,
+        verbose_name="activoSede"
+    )
 
     def __str__(self):
         return self.ubicacion

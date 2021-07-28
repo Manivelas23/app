@@ -36,12 +36,17 @@ class SedeListView(TemplateView):
             if request.POST['accion'] == 'agregar':
                 obj_sede = sede()
                 obj_sede.ubicacion = str(request.POST['ubicacion']).title()
+                obj_sede.cant_supervisores = request.POST['cant_supervisores']
+                obj_sede.cant_computadoras = request.POST['cant_computadoras']
+                obj_sede.activo = request.POST['activo']
                 obj_sede.save()
 
             if request.POST['accion'] == 'editar':
                 obj_sede = sede.objects.get(pk=request.POST['id'])
-                obj_sede.ubicacion = request.POST['ubicacion']
-                obj_sede.ubicacion = obj_sede.ubicacion.title()
+                obj_sede.ubicacion = str(request.POST['ubicacion']).title()
+                obj_sede.cant_supervisores = request.POST['cant_supervisores']
+                obj_sede.cant_computadoras = request.POST['cant_computadoras']
+                obj_sede.activo = request.POST['activo']
                 obj_sede.save()
 
             if request.POST['accion'] == 'eliminar':

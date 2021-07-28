@@ -3,7 +3,7 @@ var tblSede;
 function cargarTabla() {
     tblSede = $('.mydatatable').DataTable({
         responsive: true,
-        autoWidth: false,
+        autoWidth: true,
         destroy: true,
         deferRender: true,
         fixedColumns: {
@@ -18,6 +18,9 @@ function cargarTabla() {
         columns: [
             {data: "id"},
             {data: "ubicacion"},
+            {data: "cant_supervisores"},
+            {data: "cant_computadoras"},
+            {data: "activo"},
             {data: null},
         ],
         columnDefs: [{
@@ -42,6 +45,9 @@ $(function () {
         $('input[name="accion"]').val('editar')
         $('input[name="id"]').val(data.id)
         $('input[name="ubicacion"]').val(data.ubicacion)
+        $('input[name="cant_supervisores"]').val(data.cant_supervisores)
+        $('input[name="cant_computadoras"]').val(data.cant_computadoras)
+        $('input[name="activo"]').val(data.cant_computadoras)
         $('#exampleModal').modal('show')
     });
 
@@ -51,13 +57,17 @@ $(function () {
         data = Object.assign(data, {'accion': 'eliminar'})
 
         var form = new FormData();
+
+        //agregar la accion del formulario al formdata
         for (var key in data) {
             form.append(key, data[key]);
         }
 
         var ruta_destino = window.location.pathname
         enviarConAjax(form, ruta_destino)
+
     })
+
 
     $('#exampleModal').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');

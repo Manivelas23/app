@@ -82,7 +82,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Prueba',7,'add_prueba'),(26,'Can change Prueba',7,'change_prueba'),(27,'Can delete Prueba',7,'delete_prueba'),(28,'Can view Prueba',7,'view_prueba'),(29,'Can add Sede',8,'add_sede'),(30,'Can change Sede',8,'change_sede'),(31,'Can delete Sede',8,'delete_sede'),(32,'Can view Sede',8,'view_sede'),(33,'Can add Tipo de Identifación',9,'add_tipo_identificacion'),(34,'Can change Tipo de Identifación',9,'change_tipo_identificacion'),(35,'Can delete Tipo de Identifación',9,'delete_tipo_identificacion'),(36,'Can view Tipo de Identifación',9,'view_tipo_identificacion'),(37,'Can add Persona',10,'add_persona'),(38,'Can change Persona',10,'change_persona'),(39,'Can delete Persona',10,'delete_persona'),(40,'Can view Persona',10,'view_persona'),(41,'Can add fecha',11,'add_fecha'),(42,'Can change fecha',11,'change_fecha'),(43,'Can delete fecha',11,'delete_fecha'),(44,'Can view fecha',11,'view_fecha'),(45,'Can add cita',12,'add_cita'),(46,'Can change cita',12,'change_cita'),(47,'Can delete cita',12,'delete_cita'),(48,'Can view cita',12,'view_cita');
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Prueba',7,'add_prueba'),(26,'Can change Prueba',7,'change_prueba'),(27,'Can delete Prueba',7,'delete_prueba'),(28,'Can view Prueba',7,'view_prueba'),(29,'Can add Sede',8,'add_sede'),(30,'Can change Sede',8,'change_sede'),(31,'Can delete Sede',8,'delete_sede'),(32,'Can view Sede',8,'view_sede'),(33,'Can add Tipo de Identifación',9,'add_tipo_identificacion'),(34,'Can change Tipo de Identifación',9,'change_tipo_identificacion'),(35,'Can delete Tipo de Identifación',9,'delete_tipo_identificacion'),(36,'Can view Tipo de Identifación',9,'view_tipo_identificacion'),(37,'Can add Persona',10,'add_persona'),(38,'Can change Persona',10,'change_persona'),(39,'Can delete Persona',10,'delete_persona'),(40,'Can view Persona',10,'view_persona'),(41,'Can add fecha',11,'add_fecha'),(42,'Can change fecha',11,'change_fecha'),(43,'Can delete fecha',11,'delete_fecha'),(44,'Can view fecha',11,'view_fecha'),(45,'Can add cita',12,'add_cita'),(46,'Can change cita',12,'change_cita'),(47,'Can delete cita',12,'delete_cita'),(48,'Can view cita',12,'view_cita'),(49,'Can add Curso',13,'add_curso'),(50,'Can change Curso',13,'change_curso'),(51,'Can delete Curso',13,'delete_curso'),(52,'Can view Curso',13,'view_curso');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,6 +217,31 @@ LOCK TABLES `core_cita` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `core_curso`
+--
+
+DROP TABLE IF EXISTS `core_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `core_curso` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `tipo_curso` varchar(300) DEFAULT NULL,
+  `desc_curso` varchar(300) DEFAULT NULL,
+  `nomb_curso` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `core_curso`
+--
+
+LOCK TABLES `core_curso` WRITE;
+/*!40000 ALTER TABLE `core_curso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `core_curso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `core_fecha`
 --
 
@@ -281,11 +306,13 @@ DROP TABLE IF EXISTS `core_prueba`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `core_prueba` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `tipo_prueba` varchar(9) NOT NULL,
+  `tipo_prueba` varchar(50) NOT NULL,
   `tipo_licencia` varchar(2) DEFAULT NULL,
+  `id_curso_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `tipo_prueba` (`tipo_prueba`),
-  UNIQUE KEY `tipo_licencia` (`tipo_licencia`)
+  UNIQUE KEY `tipo_licencia` (`tipo_licencia`),
+  KEY `core_prueba_id_curso_id_6e9f1634_fk_core_curso_id` (`id_curso_id`),
+  CONSTRAINT `core_prueba_id_curso_id_6e9f1634_fk_core_curso_id` FOREIGN KEY (`id_curso_id`) REFERENCES `core_curso` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -308,6 +335,9 @@ DROP TABLE IF EXISTS `core_sede`;
 CREATE TABLE `core_sede` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `ubicacion` varchar(50) NOT NULL,
+  `activo` varchar(5) NOT NULL,
+  `cant_computadoras` int NOT NULL,
+  `cant_supervisores` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ubicacion` (`ubicacion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -392,7 +422,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -401,7 +431,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(12,'core','cita'),(11,'core','fecha'),(10,'core','persona'),(7,'core','prueba'),(8,'core','sede'),(9,'core','tipo_identificacion'),(6,'sessions','session');
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(12,'core','cita'),(13,'core','curso'),(11,'core','fecha'),(10,'core','persona'),(7,'core','prueba'),(8,'core','sede'),(9,'core','tipo_identificacion'),(6,'sessions','session');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,7 +448,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,7 +457,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2021-07-21 23:17:47.875196'),(2,'auth','0001_initial','2021-07-21 23:17:48.001470'),(3,'admin','0001_initial','2021-07-21 23:17:48.036489'),(4,'admin','0002_logentry_remove_auto_add','2021-07-21 23:17:48.042506'),(5,'admin','0003_logentry_add_action_flag_choices','2021-07-21 23:17:48.047465'),(6,'contenttypes','0002_remove_content_type_name','2021-07-21 23:17:48.076880'),(7,'auth','0002_alter_permission_name_max_length','2021-07-21 23:17:48.094359'),(8,'auth','0003_alter_user_email_max_length','2021-07-21 23:17:48.111839'),(9,'auth','0004_alter_user_username_opts','2021-07-21 23:17:48.117004'),(10,'auth','0005_alter_user_last_login_null','2021-07-21 23:17:48.133193'),(11,'auth','0006_require_contenttypes_0002','2021-07-21 23:17:48.134517'),(12,'auth','0007_alter_validators_add_error_messages','2021-07-21 23:17:48.140157'),(13,'auth','0008_alter_user_username_max_length','2021-07-21 23:17:48.157594'),(14,'auth','0009_alter_user_last_name_max_length','2021-07-21 23:17:48.176848'),(15,'auth','0010_alter_group_name_max_length','2021-07-21 23:17:48.191733'),(16,'auth','0011_update_proxy_permissions','2021-07-21 23:17:48.198229'),(17,'auth','0012_alter_user_first_name_max_length','2021-07-21 23:17:48.214210'),(18,'core','0001_initial','2021-07-21 23:17:48.306292'),(19,'core','0002_alter_sede_options','2021-07-21 23:17:48.311843'),(20,'core','0003_auto_20210721_2245','2021-07-21 23:19:47.122777'),(21,'core','0004_remove_fecha_id_prueba','2021-07-21 23:19:47.153226'),(22,'core','0005_fecha_id_prueba','2021-07-21 23:19:47.175136'),(23,'core','0006_alter_fecha_id_prueba','2021-07-21 23:19:47.179926'),(24,'sessions','0001_initial','2021-07-21 23:19:47.194991');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2021-07-29 22:22:29.372171'),(2,'auth','0001_initial','2021-07-29 22:22:29.497273'),(3,'admin','0001_initial','2021-07-29 22:22:29.533460'),(4,'admin','0002_logentry_remove_auto_add','2021-07-29 22:22:29.538544'),(5,'admin','0003_logentry_add_action_flag_choices','2021-07-29 22:22:29.543871'),(6,'contenttypes','0002_remove_content_type_name','2021-07-29 22:22:29.571538'),(7,'auth','0002_alter_permission_name_max_length','2021-07-29 22:22:29.586538'),(8,'auth','0003_alter_user_email_max_length','2021-07-29 22:22:29.603699'),(9,'auth','0004_alter_user_username_opts','2021-07-29 22:22:29.609434'),(10,'auth','0005_alter_user_last_login_null','2021-07-29 22:22:29.627544'),(11,'auth','0006_require_contenttypes_0002','2021-07-29 22:22:29.629588'),(12,'auth','0007_alter_validators_add_error_messages','2021-07-29 22:22:29.634884'),(13,'auth','0008_alter_user_username_max_length','2021-07-29 22:22:29.655634'),(14,'auth','0009_alter_user_last_name_max_length','2021-07-29 22:22:29.674095'),(15,'auth','0010_alter_group_name_max_length','2021-07-29 22:22:29.690888'),(16,'auth','0011_update_proxy_permissions','2021-07-29 22:22:29.697252'),(17,'auth','0012_alter_user_first_name_max_length','2021-07-29 22:22:29.715251'),(18,'core','0001_initial','2021-07-29 22:22:29.797185'),(19,'core','0002_alter_sede_options','2021-07-29 22:22:29.799598'),(20,'core','0003_auto_20210721_2245','2021-07-29 22:22:29.823177'),(21,'core','0004_remove_fecha_id_prueba','2021-07-29 22:22:29.852800'),(22,'core','0005_fecha_id_prueba','2021-07-29 22:22:29.870054'),(23,'core','0006_alter_fecha_id_prueba','2021-07-29 22:22:29.873636'),(24,'core','0007_alter_fecha_id_sede','2021-07-29 22:22:29.877472'),(25,'core','0008_alter_prueba_tipo_prueba','2021-07-29 22:22:29.892027'),(26,'core','0009_auto_20210728_2115','2021-07-29 22:22:29.924989'),(27,'core','0010_alter_sede_activo','2021-07-29 22:22:29.935250'),(28,'core','0011_alter_sede_activo','2021-07-29 22:22:29.937859'),(29,'core','0012_prueba_curso','2021-07-29 22:22:29.954140'),(30,'core','0013_alter_prueba_curso','2021-07-29 22:22:29.958200'),(31,'core','0014_alter_prueba_curso','2021-07-29 22:22:29.969660'),(32,'core','0015_auto_20210729_2124','2021-07-29 22:22:29.998753'),(33,'core','0016_prueba_curso','2021-07-29 22:22:30.014709'),(34,'core','0017_auto_20210729_2154','2021-07-29 22:22:30.070935'),(35,'core','0018_alter_prueba_id_curso','2021-07-29 22:22:30.107125'),(36,'sessions','0001_initial','2021-07-29 22:22:30.116127');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,4 +495,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-21 17:27:05
+-- Dump completed on 2021-07-29 16:30:03

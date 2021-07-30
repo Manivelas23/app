@@ -63,6 +63,20 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# LOCAL
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'db3',
+#         'USER': 'root',
+#         'PASSWORD': 'Kittyvox2021',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     },
+#
+# }
+
+# HOSTEADA
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

@@ -19,6 +19,9 @@ function cargarTabla() {
             {data: "id"},
             {data: "tipo_prueba"},
             {data: "tipo_licencia"},
+            {data: "nomb_curso"},
+            {data: "tipo_curso"},
+            {data: "desc_curso"},
             {data: null},
         ],
         columnDefs: [{
@@ -35,7 +38,7 @@ function cargarTabla() {
 };
 
 $(function () {
-    cargarTabla()
+    cargarTabla();
 
     //funcion para obtener el id del elemento y editarlo
     $('.mydatatable tbody').on('click', 'a[rel="editar"]', function () {
@@ -44,7 +47,9 @@ $(function () {
         $('input[name="accion"]').val('editar')
         $('input[name="id"]').val(data.id)
         $('input[name="tipo_prueba"]').val(data.tipo_prueba)
-        $('input[name="tipo_licencia"]').val(data.tipo_licencia)
+        $('input[name="nomb_curso"]').val(data.nomb_curso)
+        $('input[name="tipo_curso"]').val(data.tipo_curso)
+        $('input[name="desc_curso"]').val(data.desc_curso)
         $('#exampleModal').modal('show')
     });
 

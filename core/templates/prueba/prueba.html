@@ -6,9 +6,11 @@
 {% block page_title %}{{ page_title }}{% endblock %}
 
 {% block form %}
-    {% for field in form.visible_fields %}
-        <label>{{ field.label }}</label>
-        {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+    {% for form in form %}
+        {% for field in form.visible_fields %}
+            <label>{{ field.label }}</label>
+            {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+        {% endfor %}
     {% endfor %}
 {% endblock %}
 

@@ -26,9 +26,48 @@ class tipo_identificacion(models.Model):
         verbose_name_plural = "Tipo de Identificaciones"
 
 
+class curso(models.Model):
+    nomb_curso = models.CharField(
+        max_length=200,
+        unique=False,
+        null=True,
+        blank=True,
+        verbose_name="Nombre del Curso"
+    )
+    tipo_curso = models.CharField(
+        max_length=300,
+        unique=False,
+        null=True,
+        blank=True,
+        verbose_name="Tipo de Curso"
+    )
+    desc_curso = models.CharField(
+        max_length=300,
+        unique=False,
+        null=True,
+        blank=True,
+        verbose_name="Descripcion de Curso"
+    )
+
+    def __str__(self):
+        return self.curso
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
+    class Meta:
+        ordering = ["id"]
+        verbose_name = "Curso"
+        verbose_name_plural = "Cursos"
+
+    def __str__(self):
+        return self.nomb_curso
+
+
 class prueba(models.Model):
     tipo_prueba = models.CharField(
-        max_length=9,
+        max_length=50,
         unique=False,
         null=False,
         blank=False,
@@ -37,10 +76,14 @@ class prueba(models.Model):
 
     tipo_licencia = models.CharField(
         max_length=2,
-        unique=True,
+        unique=False,
         null=True,
-        blank=False,
+        blank=True,
         verbose_name="tipo_licencia"
+    )
+    id_curso = models.ForeignKey(
+        curso,
+        on_delete=models.CASCADE
     )
 
     def toJSON(self):
@@ -115,7 +158,6 @@ class sede(models.Model):
     )
     activo = models.CharField(
         max_length=5,
-        default='True',
         verbose_name="activoSede"
     )
 

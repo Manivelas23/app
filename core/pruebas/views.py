@@ -36,16 +36,13 @@ class PruebaTemplateView(ListView):
                 lista_pruebas = [i.toJSON() for i in prueba.objects.all()]
                 lista_cursos = [i.toJSON() for i in curso.objects.all()]
                 lista_curso_pruebas = list(zip(lista_pruebas,lista_cursos))
-                x = {}
+                dict_final_prueba = {}
                 for i,j in lista_curso_pruebas:
-                    print("i: "+ str(i))
-                    print("j: "+ str(j))
-                    x = i
+                    dict_final_prueba = i
                     j['id_curso'] = j.pop('id')
-                    x.update(j)
+                    dict_final_prueba.update(j)
 
-                    print("x:" + str(x))
-                    data.append(x)
+                    data.append(dict_final_prueba)
 
             if request.POST['accion'] == 'agregar':
                 obj_curso = curso()

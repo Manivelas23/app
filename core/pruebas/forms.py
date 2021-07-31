@@ -6,7 +6,6 @@ class PruebaForm(ModelForm):
     class Meta:
         model = prueba
         fields = '__all__'
-        exclude = ['id_curso']
         labels = {
             'tipo_prueba':'Ingrese aquí el tipo de prueba:',
             'tipo_licencia':'Ingrese aquí el tipo de licencia:',

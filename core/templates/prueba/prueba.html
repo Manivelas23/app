@@ -8,8 +8,13 @@
 {% block form %}
     {% for form in form %}
         {% for field in form.visible_fields %}
-            <label>{{ field.label }}</label>
-            {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+            {% if field.name  != 'id_curso' %}
+                <label>{{ field.label }}</label>
+                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+            {% else %}
+                 {{ field|add_class:'form-control'|attr:'hidden:true' }}
+            {% endif %}
+
         {% endfor %}
     {% endfor %}
 {% endblock %}

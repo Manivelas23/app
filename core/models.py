@@ -50,7 +50,7 @@ class curso(models.Model):
     )
 
     def __str__(self):
-        return self.curso
+        return self.nomb_curso
 
     def toJSON(self):
         item = model_to_dict(self)
@@ -60,9 +60,6 @@ class curso(models.Model):
         ordering = ["id"]
         verbose_name = "Curso"
         verbose_name_plural = "Cursos"
-
-    def __str__(self):
-        return self.nomb_curso
 
 
 class prueba(models.Model):

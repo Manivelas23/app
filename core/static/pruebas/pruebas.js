@@ -46,6 +46,7 @@ $(function () {
         var data = tblSede.row(tr.row).data();
         $('input[name="accion"]').val('editar')
         $('input[name="id"]').val(data.id)
+        $('select:hidden[name="id_curso"]').val(data.id_curso)
         $('input[name="tipo_prueba"]').val(data.tipo_prueba)
         $('input[name="nomb_curso"]').val(data.nomb_curso)
         $('input[name="tipo_curso"]').val(data.tipo_curso)

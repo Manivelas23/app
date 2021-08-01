@@ -15,6 +15,17 @@
         <input class="form-control" type="text" id="date_timepicker_end" autocomplete="off">
     </div>
 
+    {% for form in form %}
+        {% for field in form.visible_fields %}
+            {% if field.name  != 'id_sede' %}
+                <label>{{ field.label }}</label>
+                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+            {% else %}
+                {{ field|add_class:'form-control'|attr:'hidden:true' }}
+            {% endif %}
+
+        {% endfor %}
+    {% endfor %}
 
 {% endblock form %}
 

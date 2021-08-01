@@ -1,7 +1,7 @@
-var tblSede;
+var tbl;
 
 function cargarTabla() {
-    tblSede = $('.mydatatable').DataTable({
+    tbl = $('.mydatatable').DataTable({
         responsive: true,
         autoWidth: true,
         destroy: false,
@@ -42,8 +42,8 @@ $(function () {
 
     //funcion para obtener el id del elemento y editarlo
     $('.mydatatable tbody').on('click', 'a[rel="editar"]', function () {
-        var tr = tblSede.cell($(this).closest('td, li')).index();
-        var data = tblSede.row(tr.row).data();
+        var tr = tbl.cell($(this).closest('td, li')).index();
+        var data = tbl.row(tr.row).data();
         $('input[name="accion"]').val('editar')
         $('input[name="id"]').val(data.id)
         $('select:hidden[name="id_curso"]').val(data.id_curso)
@@ -56,8 +56,8 @@ $(function () {
 
     //funcion para obtener el id del elemento y eliminarlo
     $('.mydatatable tbody').on('click', 'a[rel="eliminar"]', function () {
-        var tr = tblSede.cell($(this).closest('td, li')).index();
-        var data = tblSede.row(tr.row).data();
+        var tr = tbl.cell($(this).closest('td, li')).index();
+        var data = tbl.row(tr.row).data();
         data = Object.assign(data, {'accion': 'eliminar'})
 
         var form = new FormData();

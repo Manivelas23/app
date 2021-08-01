@@ -1,20 +1,17 @@
-import listview as listview
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, CreateView
-from .forms import FechaForm
-from core.models import fecha
-from core.models import sede
+from .forms import FechaForm, PruebaForm
+from core.models import fecha, sede, prueba
 from django.db import models
+
 
 class FechaListView(ListView):
     model = fecha
     template_name = 'fechas/fecha.html'
     context_object_name = 'fechas'
-    form_class = FechaForm
+    form_class = FechaForm, PruebaForm
 
     simple_field_names = [field.name for field in fecha._meta.get_fields()
                           if not isinstance(field, (models.ManyToOneRel, models.ManyToManyRel))]
@@ -40,6 +37,6 @@ class FechaListView(ListView):
         context['sedes'] = sede.objects.all()
         context['table_content'] = self.simple_field_names
         context['agregar_title'] = "Agregar una Nueva Fecha"
+        context['form'] = [FechaForm(), PruebaForm()]
+
         return context
-
-

@@ -1,3 +1,4 @@
+
 from django.forms import *
 from core.models import prueba, curso
 from datetime import datetime
@@ -16,4 +17,3 @@ class CursoForm(ModelForm):
     class Meta:
         model = curso
         fields = '__all__'
-

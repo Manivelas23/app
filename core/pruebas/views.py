@@ -1,28 +1,19 @@
-from django.core.serializers import json
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView
 from core.models import prueba, curso
 from .forms import PruebaForm, CursoForm
-from django.db import models, transaction
+from django.db import transaction
+from .extra import *
 
 
-class PruebaTemplateView(ListView):
+class PruebaTemplateView(TemplateView):
     model = prueba
     template_name = 'prueba/prueba.html'
     context_object_name = 'pruebas'
     form_class = PruebaForm, CursoForm
     obj_prueba = prueba()
-
-    # CLASS METHODS
-    def get_model_names(self):
-        simple_field_names = [field.name for field in prueba._meta.get_fields() if
-                              not isinstance(field, (models.ForeignKey, models.ManyToOneRel, models.ManyToManyRel))]
-        simple_field_names += [field.name for field in curso._meta.get_fields() if
-                               not isinstance(field, (models.ForeignKey, models.ManyToOneRel, models.ManyToManyRel))]
-        simple_field_names.pop(3)
-        return simple_field_names
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -32,17 +23,7 @@ class PruebaTemplateView(ListView):
         data = {}
         try:
             if request.POST['accion'] == 'obtener_pruebas':
-                data = []
-                lista_pruebas = [i.toJSON() for i in prueba.objects.all()]
-                lista_cursos = [i.toJSON() for i in curso.objects.all()]
-                lista_curso_pruebas = list(zip(lista_pruebas,lista_cursos))
-                dict_final_prueba = {}
-                for i,j in lista_curso_pruebas:
-                    dict_final_prueba = i
-                    j['id_curso'] = j.pop('id')
-                    dict_final_prueba.update(j)
-
-                    data.append(dict_final_prueba)
+                data = get_table_data()
 
             if request.POST['accion'] == 'agregar':
                 obj_curso = curso()
@@ -60,7 +41,6 @@ class PruebaTemplateView(ListView):
                 obj_prueba.save()
 
             if request.POST['accion'] == 'editar':
-
                 with transaction.atomic():
                     obj_curso = curso.objects.get(pk=request.POST['id_curso'])
                     obj_curso.nomb_curso = str(request.POST['nomb_curso']).upper()
@@ -88,6 +68,6 @@ class PruebaTemplateView(ListView):
         context['page_title'] = 'Listado Pruebas'
         context['page_info'] = 'Pruebas'
         context['agregar_title'] = "Agregar una Prueba"
-        context['table_content'] = self.get_model_names()
+        context['table_content'] = get_model_verbosename()
         context['form'] = [PruebaForm(), CursoForm()]
         return context

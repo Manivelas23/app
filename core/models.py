@@ -68,7 +68,7 @@ class prueba(models.Model):
         unique=False,
         null=False,
         blank=False,
-        verbose_name="tipo_prueba"
+        verbose_name="Tipo de Prueba"
     )
 
     tipo_licencia = models.CharField(
@@ -76,7 +76,7 @@ class prueba(models.Model):
         unique=False,
         null=True,
         blank=True,
-        verbose_name="tipo_licencia"
+        verbose_name="Tipo de Licencia"
     )
     id_curso = models.ForeignKey(
         curso,

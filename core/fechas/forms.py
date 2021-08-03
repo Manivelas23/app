@@ -10,6 +10,9 @@ class FechaForm(ModelForm):
     class Meta:
         model = fecha
         fields = '__all__'
+        labels = {
+            'id_prueba': 'Selecccione el Id de la Prueba'
+        }
 
 
 class PruebaForm(ModelForm):

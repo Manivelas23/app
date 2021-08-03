@@ -7,12 +7,12 @@
 {% block form %}
     <div class="mb-3">
         <label class="form-label">INGRESE LA FECHA DE INICIO PARA GENERAR LAS CITAS:</label>
-        <input class="form-control" type="text" id="date_timepicker_start" autocomplete="off">
+        <input readonly class="form-control" type="text" id="date_timepicker_start" autocomplete="off" placeholder="Ingrese la Fecha de Inicio">
     </div>
 
     <div class="mb-3">
         <label class="form-label">INGRESE LA FECHA FINAL PARA GENERAR LAS CITA:</label>
-        <input class="form-control" type="text" id="date_timepicker_end" autocomplete="off">
+        <input readonly class="form-control" type="text" id="date_timepicker_end" autocomplete="off" placeholder="Ingrese la Fecha de Fin">
     </div>
 
     {% for form in form %}
@@ -23,7 +23,6 @@
             {% else %}
                 {{ field|add_class:'form-control'|attr:'hidden:true' }}
             {% endif %}
-
         {% endfor %}
     {% endfor %}
 

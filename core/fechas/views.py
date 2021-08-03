@@ -1,20 +1,17 @@
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView
 from .forms import FechaForm, PruebaForm
-from core.models import fecha, sede, prueba
+from core.models import fecha, sede, prueba,curso
 from django.db import models
+from .extra import *
 
-
-class FechaListView(ListView):
+class FechaListView(TemplateView):
     model = fecha
-    template_name = 'fechas/fecha.html'
+    template_name = 'fechas/create_fecha.html'
     context_object_name = 'fechas'
     form_class = FechaForm, PruebaForm
-
-    simple_field_names = [field.name for field in fecha._meta.get_fields()
-                          if not isinstance(field, (models.ManyToOneRel, models.ManyToManyRel))]
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -24,8 +21,7 @@ class FechaListView(ListView):
         data = {}
         try:
             data = []
-            for i in fecha.objects.all():
-                data.append(i)
+            data.append("")
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -35,8 +31,8 @@ class FechaListView(ListView):
         context['page_title'] = 'Listado Fechas'
         context['page_info'] = 'Fechas Disponibles'
         context['sedes'] = sede.objects.all()
-        context['table_content'] = self.simple_field_names
+        context['table_content'] = get_model_verbosename
         context['agregar_title'] = "Agregar una Nueva Fecha"
-        context['form'] = [FechaForm(), PruebaForm()]
-
+        context['form'] = FechaForm()
+        context['prueba_curso_data'] = get_table_data()
         return context

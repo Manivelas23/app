@@ -1,0 +1,145 @@
+{% extends 'home.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">Generar Fechas</h3>
+        </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+            <h5>Selección de Fechas</h5>
+            <form action="." method="post" class="container-fluid" enctype="multipart/form-data" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label class="form-label">INGRESE LA FECHA DE INICIO PARA GENERAR LAS CITAS:</label>
+                                <input readonly name="fecha_inicio" class="form-control" type="text"
+                                       id="date_timepicker_start"
+                                       autocomplete="off" placeholder="Ingrese la Fecha de Inicio">
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <label class="form-label">INGRESE LA FECHA FINAL PARA GENERAR LAS CITA:</label>
+                                <input readonly class="form-control" type="text" id="date_timepicker_end"
+                                       autocomplete="off"
+                                       placeholder="Ingrese la Fecha de Fin">
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <h5>Selección de Cursos</h5>
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="form-label">SELECCIONE EL CURSO PARA CREAR LAS FECHAS:</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    {% for i in  prueba_curso_data %}
+                                        <option value={{ i.id }}>
+
+                                            {{ i.tipo_prueba }}
+
+                                            {% if i.tipo_licencia %}
+                                                - {{ i.tipo_licencia }}
+                                            {% endif %}
+
+                                            {% if i.nomb_curso %}
+                                                - {{ i.nomb_curso }}
+                                            {% endif %}
+
+                                            {% if i.tipo_curso %}
+                                                -  {{ i.tipo_curso }}
+                                            {% endif %}
+
+                                            {% if i.desc_curso %}
+                                                -  {{ i.desc_curso }}
+                                            {% endif %}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <h5>Selección de Sedes</h5>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 container container-fluid">
+                            <div class="form-group">
+                                <label class="form-label">SELECCIONE LAS SEDES PARA APLICAR LAS FECHAS DE LAS
+                                    CITAS:</label>
+                                <div class="mb-3 card-header">
+                                    <input class="form-check-input selecciona-todas-sedes" type="checkbox"
+                                           id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Seleccionar todas las sedes
+                                    </label>
+                                </div>
+
+                                {% for sede in  sedes %}
+                                    <input type="checkbox" class="btn-check sedes-btn"
+                                           id="btncheck{{ forloop.counter }}" value="{{ sede }}"
+                                           autocomplete="off">
+                                    <label class="btn btn-outline-primary"
+                                           for="btncheck{{ forloop.counter }}"> {{ sede }}</label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <input type="button" id="caca">
+        <div class="card-body d-grid gap-4">
+            <button type="submit" class="btn btn-md btn-success submit-btn">Guardar</button>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+
+{% endblock %}
+
+
+{% block js %}
+
+
+    <script src="{% static 'fecha/fecha.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+    <script type="application/javascript">
+        $(function () {
+
+            $('#caca').on('click', function () {
+                console.log($('input[name="fecha_inicio"]').val())
+            })
+
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                var form = new FormData(this);
+                var ruta_destino = window.location.pathname
+                enviarConAjax(form, ruta_destino)
+            });
+
+
+            //datetime inputs settings
+            datetimepicker_settings();
+
+            //checkbox settings
+            seleccionar_sedes();
+
+            obtener_sedes();
+        });
+    </script>
+{% endblock js %}

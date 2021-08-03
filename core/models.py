@@ -50,7 +50,7 @@ class curso(models.Model):
     )
 
     def __str__(self):
-        return self.nomb_curso
+        return str(self.id)
 
     def toJSON(self):
         item = model_to_dict(self)
@@ -88,7 +88,7 @@ class prueba(models.Model):
         return item
 
     def __str__(self):
-        return self.tipo_prueba
+        return str(self.id)
 
     class Meta:
         ordering = ["id"]
@@ -143,19 +143,19 @@ class sede(models.Model):
         null=False,
         blank=False,
         unique=True,
-        verbose_name="ubicacionSede"
+        verbose_name="Ubicación de la Sede"
     )
     cant_supervisores = models.IntegerField(
         default=0,
-        verbose_name="cantSupervisores"
+        verbose_name="Cantidad de Supervisores"
     )
     cant_computadoras = models.IntegerField(
         default=0,
-        verbose_name="cantComputadoras"
+        verbose_name="Cantidad de Computadoras"
     )
     activo = models.CharField(
         max_length=5,
-        verbose_name="activoSede"
+        verbose_name="Sede Activa"
     )
 
     def __str__(self):
@@ -176,17 +176,20 @@ class fecha(models.Model):
         auto_now_add=False,
         null=False,
         blank=False,
-        unique=True
+        unique=True,
+        verbose_name='Fecha Disponible'
     )
 
     id_sede = models.ForeignKey(
         sede,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        verbose_name='Id de la Sede'
     )
 
     id_prueba = models.ForeignKey(
         prueba,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        verbose_name='Id de la Prueba'
     )
 
     def __str__(self):
@@ -213,7 +216,7 @@ class cita(models.Model):
     id_fecha_cita = models.OneToOneField(
         fecha,
         on_delete=models.CASCADE,
-        verbose_name="fechaCita"
+        verbose_name="Fecha de la Cita"
     )
 
     otras_indicaciones = models.CharField(

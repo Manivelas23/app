@@ -6,6 +6,7 @@ from .forms import FechaForm, PruebaForm
 from core.models import fecha, sede, prueba,curso
 from django.db import models
 from .extra import *
+from .bot_fechas import GeneradorCitas
 
 class FechaListView(TemplateView):
     model = fecha
@@ -20,8 +21,9 @@ class FechaListView(TemplateView):
     def post(self, request, *args, **kwargs):
         data = {}
         try:
-            data = []
-            data.append("")
+            if request.POST['accion'] == 'agregar':
+                generadorCitas = GeneradorCitas(request.POST)
+                generadorCitas.citas_dias_laborales()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

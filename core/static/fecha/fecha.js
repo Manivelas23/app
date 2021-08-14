@@ -48,16 +48,16 @@ function obtener_sedes() {
 
 
 //TODO: AGREGAR EL SELECT DE PRUEBAS
-function select_pruebas(ruta_destino, accion) {
-    $('.select2').select2({
-        ajax: {
-            url: ruta_destino,
-            data: {
-                'accion': accion
-            }
-        }
-    })
-};
+// function select_pruebas(ruta_destino, accion) {
+//     $('.select2').select2({
+//         ajax: {
+//             url: ruta_destino,
+//             data: {
+//                 'accion': accion
+//             }
+//         }
+//     })
+// };
 
 
 

@@ -1,8 +1,7 @@
 function enviarConAjax(form, ruta_destino) {
-for (var pair of form.entries()) {
-    console.log(pair[0]+ ', ' + pair[1]);
-}
-
+    // for ([key, value] of form.entries()) {
+    //     console.log(key, value);
+    // }
     $.jAlert({
         'type': 'confirm',
         'title': 'Atencion!',

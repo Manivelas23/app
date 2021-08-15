@@ -2,6 +2,7 @@
 from datetime import timedelta
 import datetime
 from dateutil.easter import *
+import numpy as np
 from core.models import *
 import re
 
@@ -58,18 +59,17 @@ class GeneradorCitas:
         dias = []
         fechaInicio = self.fecha_inicio
         fechaFin = self.fecha_fin
-        while fechaInicio.date() <= fechaFin.date():
-            if fechaInicio.isoweekday() not in finesSemana:
-                for i in range(7, 15):
-                    hours_added = datetime.timedelta(hours=1)
-                    if fechaInicio.hour == 14: hours_added = datetime.timedelta(hours=-7)
-                    fechaInicio = fechaInicio + hours_added
-                    if fechaInicio.hour != 12: dias.append(fechaInicio)
-            fechaInicio += timedelta(days=1)
-
-        for feriado in feriados:
-            for cita in dias:
-                print(cita)
-                print(feriado)
-                if cita.date() == feriado: dias.remove(cita)
-        print("dias", dias)
+        try:
+            while fechaInicio.date() <= fechaFin.date():
+                if fechaInicio.isoweekday() not in finesSemana:
+                    for i in range(7, 15):
+                        hours_added = datetime.timedelta(hours=1)
+                        j = np.unique(np.array([datetime.datetime.combine(j, fechaInicio.time()) for j in feriados]))
+                        if fechaInicio not in j:
+                            if fechaInicio.hour == 14: hours_added = datetime.timedelta(hours=-7)
+                            fechaInicio = fechaInicio + hours_added
+                            if fechaInicio.hour != 12: dias.append(fechaInicio)
+                fechaInicio += timedelta(days=1)
+            print(dias)
+        except Exception as e:
+            print(str(e))

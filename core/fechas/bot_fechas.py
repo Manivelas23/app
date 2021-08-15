@@ -45,24 +45,31 @@ class GeneradorCitas:
             print(str(e))
 
     def calcular_semana_santa(self):
+        feriados_semana_santa = []
         domingo_resurr = easter(2021)
         dia_semana_santa = domingo_resurr
         for i in range(0, 7):
             dia_semana_santa = dia_semana_santa - timedelta(days=1)
-            self.feriados.append(dia_semana_santa)
+            feriados_semana_santa.append(dia_semana_santa)
+        return feriados_semana_santa
 
     def citas_dias_laborales(self, finesSemana=(6, 7)):
-        self.calcular_semana_santa()
+        feriados = self.feriados + self.calcular_semana_santa()
         dias = []
-        while self.fecha_inicio.date() <= self.fecha_fin.date():
-            if self.fecha_inicio.isoweekday() not in finesSemana:
+        fechaInicio = self.fecha_inicio
+        fechaFin = self.fecha_fin
+        while fechaInicio.date() <= fechaFin.date():
+            if fechaInicio.isoweekday() not in finesSemana:
                 for i in range(7, 15):
                     hours_added = datetime.timedelta(hours=1)
-                    if self.fecha_inicio.date() not in self.feriados:
-                        if self.fecha_inicio.hour == 14: hours_added = datetime.timedelta(hours=-7)
-                        self.fecha_inicio = self.fecha_inicio + hours_added
-                        if self.fecha_inicio.hour != 12: dias.append(self.fecha_inicio)
-                self.fecha_inicio += timedelta(days=1)
-        print("feriados", self.feriados)
+                    if fechaInicio.hour == 14: hours_added = datetime.timedelta(hours=-7)
+                    fechaInicio = fechaInicio + hours_added
+                    if fechaInicio.hour != 12: dias.append(fechaInicio)
+            fechaInicio += timedelta(days=1)
+
+        for feriado in feriados:
+            for cita in dias:
+                print(cita)
+                print(feriado)
+                if cita.date() == feriado: dias.remove(cita)
         print("dias", dias)
-        return dias

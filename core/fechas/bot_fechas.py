@@ -11,7 +11,6 @@ class GeneradorCitas:
     def __init__(self, data):
         try:
             data = data.dict()
-
             self.lista_citas = []
 
             fecha_inicio_parsed = datetime.datetime.strptime(data['fecha_inicio'], '%Y/%m/%d %H:%M')
@@ -22,6 +21,8 @@ class GeneradorCitas:
                                                   fecha_inicio_parsed.day,
                                                   fecha_inicio_parsed.hour,
                                                   fecha_inicio_parsed.minute)
+
+            self.id_prueba = data['select_prueba']
 
             self.fecha_fin = datetime.datetime(fecha_fin_parsed.year,
                                                fecha_fin_parsed.month,
@@ -56,7 +57,7 @@ class GeneradorCitas:
 
     def citas_dias_laborales(self, finesSemana=(6, 7)):
         feriados = self.feriados + self.calcular_semana_santa()
-        dias = []
+        fechas = []
         fechaInicio = self.fecha_inicio
         fechaFin = self.fecha_fin
         try:
@@ -64,12 +65,27 @@ class GeneradorCitas:
                 if fechaInicio.isoweekday() not in finesSemana:
                     for i in range(7, 15):
                         hours_added = datetime.timedelta(hours=1)
-                        j = np.unique(np.array([datetime.datetime.combine(j, fechaInicio.time()) for j in feriados]))
-                        if fechaInicio not in j:
+                        feriados = np.unique(np.array([datetime.datetime.combine(j, fechaInicio.time()) for j in feriados]))
+                        if fechaInicio not in feriados:
                             if fechaInicio.hour == 14: hours_added = datetime.timedelta(hours=-7)
                             fechaInicio = fechaInicio + hours_added
-                            if fechaInicio.hour != 12: dias.append(fechaInicio)
+                            if fechaInicio.hour != 12: fechas.append(fechaInicio)
                 fechaInicio += timedelta(days=1)
-            print(dias)
         except Exception as e:
             print(str(e))
+        return fechas
+
+    def generar_citas(self):
+        citas_dict_list = []
+        id_prueba = self.id_prueba
+        fechas = self.citas_dias_laborales()
+        for sede in self.sedes:
+            for fecha in fechas:
+                fecha_cita = {
+                    "fecha_disponible": fecha,
+                    "id_sede": sede,
+                    "id_prueba": id_prueba
+                }
+                citas_dict_list.append(fecha_cita)
+        return citas_dict_list
+

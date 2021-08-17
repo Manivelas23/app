@@ -1,6 +1,6 @@
-from core.models import fecha, prueba, curso
+from core.models import *
 from django.db import models
-from core.pruebas.extra import get_table_data
+from core.pruebas.extra import getTableData
 
 
 def get_model_verbosename():
@@ -8,4 +8,8 @@ def get_model_verbosename():
             not isinstance(field, (models.ManyToOneRel, models.ManyToManyRel))]
 
 
-get_table_data()
+def getSedes():
+    return [i.toJSON() for i in sede.objects.all()]
+
+
+getTableData()

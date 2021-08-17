@@ -32,6 +32,10 @@ class FechaListView(TemplateView):
                     obj_fecha.id_prueba = prueba.objects.get(pk=int(fecha_cita['id_prueba']))
                     obj_fecha.id_sede = sede.objects.get(pk=int(fecha_cita['id_sede']))
                     obj_fecha.save()
+            if request.POST['accion'] == 'cargar_pruebas':
+                data = getTableData()
+            if request.POST['accion'] == 'cargar_sedes':
+                data = getSedes()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -44,5 +48,4 @@ class FechaListView(TemplateView):
         context['table_content'] = get_model_verbosename
         context['agregar_title'] = "Agregar una Nueva Fecha"
         context['form'] = FechaForm()
-        context['prueba_curso_data'] = get_table_data()
         return context

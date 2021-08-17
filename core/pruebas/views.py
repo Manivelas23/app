@@ -23,7 +23,7 @@ class PruebaTemplateView(TemplateView):
         data = {}
         try:
             if request.POST['accion'] == 'obtener_pruebas':
-                data = get_table_data()
+                data = getTableData()
 
             if request.POST['accion'] == 'agregar':
                 obj_curso = curso()
@@ -68,6 +68,6 @@ class PruebaTemplateView(TemplateView):
         context['page_title'] = 'Listado Pruebas'
         context['page_info'] = 'Pruebas'
         context['agregar_title'] = "Agregar una Prueba"
-        context['table_content'] = get_model_verbosename()
+        context['table_content'] = getModelVerbosename()
         context['form'] = [PruebaForm(), CursoForm()]
         return context

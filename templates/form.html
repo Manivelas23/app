@@ -11,8 +11,8 @@
                 <h3 class="card-title">{{ page_title }}</h3>
             </div>
 
-            <table class="mydatatable table-bordered table-striped dataTable dtr-inline">
-                <thead class="bg-gradient-secondary">
+            <table class="table-sm mydatatable  table-Light table-bordered table-striped table-hover">
+                <thead class="bg-primary">
                 <tr>
                     {% for table_items in  table_content %}
                         <th scope="col"> {{ table_items }}</th>
@@ -24,7 +24,7 @@
                 </tbody>
             </table>
             <!-- Button trigger modal -->
-            <button type="button" class="btn-success" id="modal_trigger" data-bs-toggle="modal"
+            <button type="button" class="btn btn-primary" id="modal_trigger" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                 {{ agregar_title }}
             </button>

@@ -1,13 +1,13 @@
-from core.models import prueba, curso
+from core.models import prueba, curso, sede
 from django.db import models
 
 
-def get_model_verbosename():
+def getModelVerbosename():
     return [name.verbose_name for name in prueba._meta.get_fields()[1:5] if hasattr(name, 'verbose_name')] + [
         name.verbose_name for name in curso._meta.get_fields()[-3:] if hasattr(name, 'verbose_name')]
 
 
-def get_table_data():
+def getTableData():
     data = []
     lista_pruebas = [i.toJSON() for i in prueba.objects.all()]
     lista_cursos = [i.toJSON() for i in curso.objects.all()]

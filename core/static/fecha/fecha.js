@@ -18,9 +18,33 @@ function datetimepicker_settings() {
     });
 };
 
+function cargarSedes() {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'accion': 'cargar_sedes'},
+        dataType: 'json'
+    }).done(function (data) {
+        console.log(data.error)
+        if (!data.hasOwnProperty('error')) {
+            for (var i in data) {
+                document.getElementById('sedes_container_fecha').innerHTML += `
+                       <input type="checkbox" class="btn-check sedes-btn"
+                            id="btncheck${data[i].id}" value="${data[i].id}" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck${data[i].id}"> ${data[i].ubicacion} </label>
+                `
+            }
+        } else {
+            alert("Ha ocurrido un Error")
+        }
+    }).fail(function (data) {
+        alert(data)
+    }).always(function (data) {
+    });
+}
+
 function seleccionar_sedes() {
     activado = false
-
     $('#flexCheckDefault').on('click', function () {
         if (activado) {
             $(".btn-check").prop('disabled', false);
@@ -46,18 +70,32 @@ function obtener_sedes() {
     return sedes_seleccinadas;
 };
 
+function cargarPruebas() {
+    $.ajax({
+        url: window.location.pathname,
+        type: 'POST',
+        data: {'accion': 'cargar_pruebas'},
+        dataType: 'json'
+    }).done(function (data) {
+        if (!data.hasOwnProperty('error')) {
+            for (var i in data) {
+                document.getElementById('select_prueba_formFecha').innerHTML += `
+                 <option value="${data[i].id}"> 
+                    ${data[i].tipo_prueba} 
+                    ${data[i].tipo_licencia}
+                    ${data[i].nomb_curso}
+                    ${data[i].tipo_curso}
+                    ${data[i].desc_curso}`
+            }
+        } else {
+            alert("Ha ocurrido un Error")
+        }
+    }).fail(function (data) {
+        alert(data)
+    }).always(function (data) {
+    });
+}
 
-//TODO: AGREGAR EL SELECT DE PRUEBAS
-// function select_pruebas(ruta_destino, accion) {
-//     $('.select2').select2({
-//         ajax: {
-//             url: ruta_destino,
-//             data: {
-//                 'accion': accion
-//             }
-//         }
-//     })
-// };
 
 
 

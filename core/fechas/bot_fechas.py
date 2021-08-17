@@ -11,7 +11,6 @@ class GeneradorCitas:
     def __init__(self, data):
         try:
             data = data.dict()
-            self.lista_citas = []
 
             fecha_inicio_parsed = datetime.datetime.strptime(data['fecha_inicio'], '%Y/%m/%d %H:%M')
             fecha_fin_parsed = datetime.datetime.strptime(data['fecha_fin'], '%Y/%m/%d %H:%M')

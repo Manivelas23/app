@@ -4,11 +4,8 @@ function cargarTabla() {
     tbl = $('.mydatatable').DataTable({
         responsive: true,
         autoWidth: true,
-        destroy: false,
+        destroy: true,
         deferRender: true,
-        fixedColumns: {
-            heightMatch: 'none'
-        },
         ajax: {
             url: window.location.pathname,
             type: 'POST',

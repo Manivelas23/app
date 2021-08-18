@@ -1,80 +1,23 @@
-{% extends 'form.html' %}
+{% extends 'table.html' %}
 {% load  static %}
 {% load widget_tweaks %}
 
-{% block page_title %}{{ page_title }}{% endblock %}
-
-{% block form %}
-    <div class="mb-3">
-        <label class="form-label">INGRESE LA FECHA DE INICIO PARA GENERAR LAS CITAS:</label>
-        <input readonly class="form-control" type="text" id="date_timepicker_start" autocomplete="off" placeholder="Ingrese la Fecha de Inicio">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">INGRESE LA FECHA FINAL PARA GENERAR LAS CITA:</label>
-        <input readonly class="form-control" type="text" id="date_timepicker_end" autocomplete="off" placeholder="Ingrese la Fecha de Fin">
-    </div>
-
-    {% for form in form %}
-        {% for field in form.visible_fields %}
-            {% if field.name  != 'id_sede' %}
-                <label>{{ field.label }}</label>
-                {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
-            {% else %}
-                {{ field|add_class:'form-control'|attr:'hidden:true' }}
-            {% endif %}
-        {% endfor %}
+{% block table_head %}
+    {% for table_items in  table_content %}
+        <th scope="col"> {{ table_items }}</th>
     {% endfor %}
-
-{% endblock form %}
-
-{% block sedes_fechas %}
-    <div class="mb-3 container-fluid" role="group" aria-label="Basic checkbox toggle button group">
-        <div class="mb-3">
-            <label class="form-label">SELECCIONE LAS SEDES PARA APLICAR LAS FECHAS DE LAS CITAS:</label>
-        </div>
-        <div class="mb-3">
-            <input class="form-check-input selecciona-todas-sedes" type="checkbox" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Seleccionar todas las sedes
-            </label>
-        </div>
-
-
-        <div class="mb-3" id="sedes-fecha-div">
-            {% for sede in  sedes %}
-                <input type="checkbox" class="btn-check sedes-btn" id="btncheck{{ forloop.counter }}" value="{{ sede }}"
-                       autocomplete="off">
-                <label class="btn btn-outline-primary" for="btncheck{{ forloop.counter }}"> {{ sede }}</label>
-            {% endfor %}
-        </div>
-    </div>
+    <th scope="col"> Acciones</th>
 {% endblock %}
 
+{% block body %}
+    <a href="{% url 'CreateFechaTemplateView' %}" class="btn btn-primary">
+        {{ agregar_title }}
+    </a>
+{% endblock %}
 
 {% block js %}
-
-
     <script src="{% static 'fecha/fecha.js' %}"></script>
     <script src="{% static 'js/enviar_ajax.js' %}"></script>
-    <script>
-        $(function () {
-
-
-            //datetime inputs settings
-            datetimepicker_settings();
-
-            //checkbox settings
-            seleccionar_sedes();
-
-            obtener_sedes();
-
-            $('#exampleModal').on('hidden.bs.modal', function () {
-                $(this).find('form').trigger('reset');
-            })
-
-        });
-    </script>
 {% endblock js %}
 
 

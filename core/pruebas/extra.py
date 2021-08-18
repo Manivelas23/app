@@ -7,7 +7,7 @@ def getModelVerbosename():
         name.verbose_name for name in curso._meta.get_fields()[-3:] if hasattr(name, 'verbose_name')]
 
 
-def getTableData():
+def getPruebaData():
     data = []
     lista_pruebas = [i.toJSON() for i in prueba.objects.all()]
     lista_cursos = [i.toJSON() for i in curso.objects.all()]

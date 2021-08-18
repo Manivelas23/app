@@ -192,6 +192,10 @@ class fecha(models.Model):
         verbose_name='Id de la Prueba'
     )
 
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
     def __str__(self):
         return self.fecha_disponible
 

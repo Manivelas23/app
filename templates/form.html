@@ -2,8 +2,6 @@
 {% load  static %}
 {% load widget_tweaks %}
 
-{#TODO: estilizar el card y la tabla#}
-
 {% block content %}
     <div class="card">
         <div class="card-body d-grid gap-4">
@@ -11,7 +9,7 @@
                 <h3 class="card-title">{{ page_title }}</h3>
             </div>
 
-            <table class="table-sm mydatatable  table-Light table-bordered table-striped table-hover">
+            <table class="table table-sm mydatatable  table-Light table-bordered table-striped table-hover">
                 <thead class="bg-primary">
                 <tr>
                     {% for table_items in  table_content %}
@@ -60,8 +58,7 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 {% endblock content %}
 
 {% block js %}

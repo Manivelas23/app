@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+{% load  static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body d-grid gap-4">
+            <div class="card-header">
+                <h3 class="card-title">{{ page_title }}</h3>
+            </div>
+
+            <table class="table table-sm table_template_table table-Light table-bordered table-striped table-hover">
+                <thead class="bg-primary">
+                <tr>
+                    {% block table_head %}
+
+                    {% endblock %}
+                </tr>
+                </thead>
+                <tbody class="h-10">
+                </tbody>
+            </table>
+            {% block body %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="{% static 'fecha/fecha.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+
+{% endblock js %}

@@ -1,3 +1,43 @@
+var tbl;
+
+function cargarTabla() {
+    tbl = $('.table_template_table').DataTable({
+        responsive: true,
+        autoWidth: true,
+        destroy: false,
+        deferRender: true,
+        fixedColumns: {
+            heightMatch: 'none'
+        },
+        ajax: {
+            url: window.location.pathname,
+            type: 'POST',
+            data: {'accion': 'obtener_fechas'},
+            dataSrc: ""
+        },
+        columns: [
+            {data: "id"},
+            {data: "fecha_disponible"},
+            {data: "ubicacion"},
+            {data: "tipo_prueba"},
+            {data: "tipo_licencia"},
+            {data: "nomb_curso"},
+            {data: "tipo_curso"},
+            {data: "desc_curso"},
+            {data: null},
+        ],
+        columnDefs: [{
+            "orderable": false,
+            targets: [-1],
+            class: 'text-center',
+            render: function (data, type, row, meta) {
+                return '<a rel="eliminar" class="btn btn-danger btn-xs"> <i class="far fa-trash-alt"></i></a>';
+            }
+        }],
+    })
+};
+
+
 function datetimepicker_settings() {
     $('#date_timepicker_start').datetimepicker({
         onShow: function () {
@@ -97,5 +137,6 @@ function cargarPruebas() {
 }
 
 
-
-
+$(function () {
+    cargarTabla()
+});

@@ -15,6 +15,8 @@ class FechasListView(TemplateView):
     model = fecha
     template_name = 'fechas/fecha.html'
     context_object_name = 'fechas'
+    obj_extra = Extra()
+
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -24,7 +26,7 @@ class FechasListView(TemplateView):
         data = {}
         try:
             if request.POST['accion'] == 'obtener_fechas':
-                data = getFechaData()
+                data = self.obj_extra.getFechaData()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -33,7 +35,7 @@ class FechasListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Listado Fechas'
         context['page_info'] = 'Fechas Disponibles'
-        context['table_content'] = getModelVerbosename()
+        context['table_content'] =self.obj_extra.getModelVerbosename()
         context['agregar_title'] = "Agregar una Nueva Fecha"
         context['form'] = FechaForm()
         return context
@@ -44,6 +46,7 @@ class CreateFechaListView(TemplateView):
     template_name = 'fechas/create_fecha.html'
     context_object_name = 'fechas'
     form_class = FechaForm, PruebaForm
+    obj_extra = Extra()
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -66,7 +69,7 @@ class CreateFechaListView(TemplateView):
                 data = getPruebaData()
 
             if request.POST['accion'] == 'cargar_sedes':
-                data = getSedes()
+                data = self.obj_extra.getSedes()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)

@@ -4,6 +4,7 @@
 
 .table {
     min-width: 100%;
+    font-size: 12px;
     text-align: center;
     padding: 2vh 0px;
 }

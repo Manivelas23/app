@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.timezone import make_aware
 from django.views.decorators.csrf import csrf_exempt
@@ -16,7 +17,7 @@ class FechasListView(TemplateView):
     template_name = 'fechas/fecha.html'
     context_object_name = 'fechas'
     obj_extra = Extra()
-
+    success_url = '/fechas/'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -27,6 +28,10 @@ class FechasListView(TemplateView):
         try:
             if request.POST['accion'] == 'obtener_fechas':
                 data = self.obj_extra.getFechaData()
+
+            if request.POST['accion'] == 'eliminar':
+                obj_fecha = fecha.objects.get(pk=request.POST['id'])
+                obj_fecha.delete()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -46,6 +51,7 @@ class CreateFechaListView(TemplateView):
     template_name = 'fechas/create_fecha.html'
     context_object_name = 'fechas'
     form_class = FechaForm, PruebaForm
+    success_url = reverse_lazy('core:FechaTemplateView')
     obj_extra = Extra()
 
     @method_decorator(csrf_exempt)
@@ -64,6 +70,7 @@ class CreateFechaListView(TemplateView):
                     obj_fecha.id_prueba = prueba.objects.get(pk=int(fecha_cita['id_prueba']))
                     obj_fecha.id_sede = sede.objects.get(pk=int(fecha_cita['id_sede']))
                     obj_fecha.save()
+
 
             if request.POST['accion'] == 'cargar_pruebas':
                 data = getPruebaData()

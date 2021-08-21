@@ -1,7 +1,8 @@
 function enviarConAjax(form, ruta_destino) {
-    // for ([key, value] of form.entries()) {
-    //     console.log(key, value);
-    // }
+    for ([key, value] of form.entries()) {
+        console.log(key, value);
+    }
+    console.log(ruta_destino)
     $.jAlert({
         'type': 'confirm',
         'title': 'Atencion!',
@@ -23,8 +24,9 @@ function enviarConAjax(form, ruta_destino) {
                 console.log(data.error)
                 if (!data.hasOwnProperty('error')) {
                     tbl.destroy();
-                    $('#exampleModal').modal('hide')
                     cargarTabla();
+                    $('#exampleModal').modal('hide')
+
                 } else {
                     $('.div-error').html(`
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">

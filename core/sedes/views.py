@@ -34,7 +34,6 @@ class SedeListView(TemplateView):
                     data.append(i.toJSON())
 
             if request.POST['accion'] == 'agregar':
-                print(request.POST)
                 obj_sede = sede()
                 obj_sede.ubicacion = str(request.POST['ubicacion']).title()
                 obj_sede.cant_supervisores = request.POST['cant_supervisores']

@@ -31,9 +31,35 @@ function cargarTabla() {
             targets: [-1],
             class: 'text-center',
             render: function (data, type, row, meta) {
-                return '<a rel="eliminar" class="btn btn-danger btn-xs"> <i class="far fa-trash-alt"></i></a>';
+                var content = `
+                    <div class="dropdown dropdown-acciones position-static">
+                      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <i class="fas fa-ellipsis-v"></i>
+                      </button>
+                      <div class="dropdown-menu position-absolute" aria-labelledby="dropdownMenuButton">
+                       <button rel="eliminar" class="dropdown-item bg-danger"><i class="fas fa-minus-circle"></i> Eliminar</button> 
+                      </div>
+                    </div>`
+                return content
+            },
+        },
+            {
+                "orderable": false,
+                targets: [1],
+                class: 'text-center',
+                render: function (data, type, row, meta) {
+                    moment.lang('es', {
+                            months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+                            monthsShort: 'Enero._Feb._Mar_Abr._May_Jun_Jul._Ago_Sept._Oct._Nov._Dec.'.split('_'),
+                            weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
+                            weekdaysShort: 'Dom._Lun._Mar._Mier._Jue._Vier._Sab.'.split('_'),
+                            weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_')
+                        }
+                    );
+                    return moment(data).format('LLLL')
+                },
             }
-        }],
+        ],
     })
 };
 
@@ -136,7 +162,26 @@ function cargarPruebas() {
     });
 }
 
+function eliminar_fecha(){
+    $('.table_template_table tbody').on('click', 'button[rel="eliminar"]', function () {
+        var tr = tbl.cell($(this).closest('td, li')).index();
+        var data = tbl.row(tr.row).data();
+        data = Object.assign(data, {'accion': 'eliminar'})
+
+        var form = new FormData();
+        for (var key in data) {
+            form.append(key, data[key]);
+        }
+
+        var ruta_destino = window.location.pathname
+        enviarConAjax(form, ruta_destino)
+    });
+}
+
 
 $(function () {
-    cargarTabla()
+    cargarTabla();
+    eliminar_fecha();
+
+
 });

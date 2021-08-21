@@ -2,6 +2,12 @@
 {% load  static %}
 {% load widget_tweaks %}
 
+{% block btnCreate %}
+    <a href="{% url 'CreateFechaTemplateView' %}" class="btn btn-primary">
+        {{ agregar_title }}
+    </a>
+{% endblock %}
+
 {% block table_head %}
     {% for table_items in  table_content %}
         <th scope="col"> {{ table_items }}</th>
@@ -9,11 +15,7 @@
     <th scope="col"> Acciones</th>
 {% endblock %}
 
-{% block body %}
-    <a href="{% url 'CreateFechaTemplateView' %}" class="btn btn-primary">
-        {{ agregar_title }}
-    </a>
-{% endblock %}
+
 
 {% block js %}
     <script src="{% static 'fecha/fecha.js' %}"></script>

@@ -74,6 +74,7 @@
                 $('.sedes-btn:checkbox:checked').each(function () {
                     data.push($(this).val());
                 });
+
                 var set_sedes = new Set(data)
                 for (var key in data) form.append("sedes", data);
 

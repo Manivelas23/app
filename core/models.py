@@ -183,13 +183,13 @@ class fecha(models.Model):
     id_sede = models.ForeignKey(
         sede,
         on_delete=models.DO_NOTHING,
-        verbose_name='Id de la Sede'
+        verbose_name='Sede'
     )
 
     id_prueba = models.ForeignKey(
         prueba,
         on_delete=models.DO_NOTHING,
-        verbose_name='Id de la Prueba'
+        verbose_name='Prueba'
     )
 
     def toJSON(self):

@@ -13,7 +13,7 @@ class Extra:
 
     def getFechaData(self):
         try:
-            data = self.getSedeNames()
+            data = self.queryDataFecha()
         except Exception as e:
             print(str(e))
         return data
@@ -26,7 +26,7 @@ class Extra:
             for row in cursor.fetchall()
         ]
 
-    def getSedeNames(self):
+    def queryDataFecha(self):
         try:
             with connection.cursor() as cursor:
                 cursor.execute("""

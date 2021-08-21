@@ -3,15 +3,18 @@
 {% load widget_tweaks %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-body d-grid gap-4">
-            <div class="card-header">
-                <h3 class="card-title">{{ page_title }}</h3>
+    <div class="card card-default">
+        <div class="card-body">
+
+            <div class="card-title btnCreate d-flex justify-content-end container-fluid">
+                {% block btnCreate %}
+
+                {% endblock %}
             </div>
 
-            <table class="table table-sm table_template_table table-Light table-bordered table-striped table-hover">
-                <thead class="bg-primary">
-                <tr>
+            <table class="table table-responsive-md table_template_table table-Light table-hover">
+                <thead>
+                <tr class="tr_title_header">
                     {% block table_head %}
 
                     {% endblock %}
@@ -35,5 +38,4 @@
 {% block js %}
     <script src="{% static 'fecha/fecha.js' %}"></script>
     <script src="{% static 'js/enviar_ajax.js' %}"></script>
-
 {% endblock js %}

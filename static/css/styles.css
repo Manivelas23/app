@@ -2,11 +2,26 @@
     font-family: 'Mulish', sans-serif;
 }
 
-.table {
+.table {;
     min-width: 100%;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
-    padding: 2vh 0px;
+    padding: 2vh;
 }
 
+.dropdown-acciones {
+    overflow: hidden;
+}
 
+.main-sidebar {
+    background: #272741;
+    color: mistyrose;
+}
+
+.nav-sidebar > nav-link> a {
+    color: mistyrose;
+}
+
+.btnCreate{
+    margin-bottom: 4vh;
+}

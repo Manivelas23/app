@@ -4,8 +4,11 @@ function cargarTabla() {
     tbl = $('.mydatatable').DataTable({
         responsive: true,
         autoWidth: true,
-        destroy: true,
+        destroy: false,
         deferRender: true,
+        fixedColumns: {
+            heightMatch: 'none'
+        },
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -56,6 +59,7 @@ $(function () {
         var tr = tbl.cell($(this).closest('td, li')).index();
         var data = tbl.row(tr.row).data();
         data = Object.assign(data, {'accion': 'eliminar'})
+        alert("borrando")
 
         var form = new FormData();
         for (var key in data) {

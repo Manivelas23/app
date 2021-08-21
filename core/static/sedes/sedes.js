@@ -1,10 +1,10 @@
-var tblSede;
+var tbl;
 
 function cargarTabla() {
-    tblSede = $('.mydatatable').DataTable({
+    tbl = $('.mydatatable').DataTable({
         responsive: true,
         autoWidth: true,
-        destroy: true,
+        destroy: false,
         deferRender: true,
         fixedColumns: {
             heightMatch: 'none'
@@ -40,8 +40,8 @@ $(function () {
     cargarTabla();
 
     $('.mydatatable tbody').on('click', 'a[rel="editar"]', function () {
-        var tr = tblSede.cell($(this).closest('td, li')).index();
-        var data = tblSede.row(tr.row).data();
+        var tr = tbl.cell($(this).closest('td, li')).index();
+        var data = tbl.row(tr.row).data();
         $('input[name="accion"]').val('editar')
         $('input[name="id"]').val(data.id)
         $('input[name="ubicacion"]').val(data.ubicacion)
@@ -52,8 +52,8 @@ $(function () {
     });
 
     $('.mydatatable tbody').on('click', 'a[rel="eliminar"]', function () {
-        var tr = tblSede.cell($(this).closest('td, li')).index();
-        var data = tblSede.row(tr.row).data();
+        var tr = tbl.cell($(this).closest('td, li')).index();
+        var data = tbl.row(tr.row).data();
         data = Object.assign(data, {'accion': 'eliminar'})
 
         var form = new FormData();

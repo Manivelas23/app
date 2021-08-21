@@ -40,7 +40,6 @@
 <body>
 
 {% include 'bar.html' %}
-
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -67,42 +66,44 @@
             {% endblock %}
         </div>
     </section>
-</div>
 
 
-<footer class="main-footer">
-    <strong>Copyright &copy; 2020-2021 <a href="">Atlas Scientific</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 0.0.1
-    </div>
-</footer>
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2020-2021 <a href="">Atlas Scientific</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 0.0.1
+        </div>
+    </footer>
 
-<!-- Jquery -->
-<script src="{% static '/lib/AdminLTE/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Jquery -->
+    <script src="{% static '/lib/AdminLTE/plugins/jquery/jquery.min.js' %}"></script>
 
-<!-- bootstrap v5-->
-<script src="{% static 'lib/bootstrap-5.0.2-dist/js/bootstrap.min.js' %}"></script>
-<script src="{% static '/lib/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- bootstrap v5-->
+    <script src="{% static 'lib/bootstrap-5.0.2-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/lib/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-<!-- AdminLT3 -->
-<script src="{% static 'lib/AdminLTE/js/adminlte.min.js' %}"></script>
-<script type="text/javascript" charset="utf8" src="{% static '/lib/AdminLTE/js/adminlte.min.js' %}"></script>
+    <!-- AdminLT3 -->
+    <script src="{% static 'lib/AdminLTE/js/adminlte.min.js' %}"></script>
+    <script type="text/javascript" charset="utf8" src="{% static '/lib/AdminLTE/js/adminlte.min.js' %}"></script>
 
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="{% static 'lib/DataTables/datatables.js' %}"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="{% static 'lib/DataTables/datatables.js' %}"></script>
+    <script src="http://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
-<!-- jAlert -->
-<script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert.min.js' %}"></script>
-<script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert-functions.min.js' %}"></script>
 
-<!-- Jquery DateTimePicker  -->
-<script src="{% static 'lib/jquery-dtpicker/jquery.datetimepicker.full.js' %}"></script>
+    <!-- jAlert -->
+    <script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert.min.js' %}"></script>
+    <script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert-functions.min.js' %}"></script>
 
-<!-- Select2  -->
-<script src="{% static 'lib/select2/select2.min.js' %}"></script>
+    <!-- Jquery DateTimePicker  -->
+    <script src="{% static 'lib/jquery-dtpicker/jquery.datetimepicker.full.js' %}"></script>
 
-{% block js %} {% endblock js %}
+    <!-- Select2  -->
+    <script src="{% static 'lib/select2/select2.min.js' %}"></script>
+
+    {% block js %} {% endblock js %}
 
 </body>
 </html>

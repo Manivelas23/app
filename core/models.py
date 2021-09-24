@@ -5,23 +5,20 @@ from django.forms import model_to_dict
 
 
 class tipo_identificacion(models.Model):
-    identificacion = models.IntegerField(
-        primary_key=True,
-        verbose_name="numId")
-
+    id = models.BigAutoField(primary_key=True)
     tipo = models.CharField(
-        max_length=50,
+        max_length=150,
         null=False,
         blank=False,
         unique=False,
-        verbose_name="tipoId"
+        verbose_name="Tipo Identificacion"
     )
 
     def __str__(self):
-        return self.identificacion
+        return str(self.tipo)
 
     class Meta:
-        ordering = ["identificacion"]
+        ordering = ["tipo"]
         verbose_name = "Tipo de Identifación"
         verbose_name_plural = "Tipo de Identificaciones"
 
@@ -88,7 +85,7 @@ class prueba(models.Model):
         return item
 
     def __str__(self):
-        return str(self.id)
+        return str('{} - {}'.format(self.tipo_prueba, self.tipo_licencia))
 
     class Meta:
         ordering = ["id"]
@@ -97,11 +94,10 @@ class prueba(models.Model):
 
 
 class persona(models.Model):
-    numero_identificacion = models.OneToOneField(
-        tipo_identificacion,
-        on_delete=models.CASCADE,
+    numero_identificacion = models.IntegerField(
         primary_key=True,
-        verbose_name="numIdPersona",
+        null=False,
+        unique=True
     )
 
     nombre = models.CharField(
@@ -109,7 +105,7 @@ class persona(models.Model):
         null=False,
         blank=False,
         unique=False,
-        verbose_name="nombre"
+        verbose_name="Nombre"
     )
 
     primer_apellido = models.CharField(
@@ -117,7 +113,7 @@ class persona(models.Model):
         null=False,
         blank=False,
         unique=False,
-        verbose_name="primerApellido",
+        verbose_name="Primer Apellido",
     )
 
     segundo_apellido = models.CharField(
@@ -125,14 +121,25 @@ class persona(models.Model):
         null=False,
         blank=False,
         unique=False,
-        verbose_name="segundoApellido",
+        verbose_name="Segundo Apellido",
+    )
+    tipo_identificacion_persona = models.CharField(
+        max_length=150,
+        null=False,
+        blank=False,
+        unique=False,
+        verbose_name="Tipo Identificación Persona",
     )
 
     def __str__(self):
-        return self.numero_identificacion
+        return str(self.numero_identificacion)
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
 
     class Meta:
-        ordering = ["numero_identificacion"]
+        ordering = ["nombre"]
         verbose_name = "Persona"
         verbose_name_plural = "Personas"
 
@@ -176,7 +183,7 @@ class fecha(models.Model):
         auto_now_add=False,
         null=False,
         blank=False,
-        unique=True,
+        unique=False,
         verbose_name='Fecha Disponible'
     )
 
@@ -197,7 +204,7 @@ class fecha(models.Model):
         return item
 
     def __str__(self):
-        return self.fecha_disponible
+        return str(self.fecha_disponible)
 
     class Meta:
         ordering = ["fecha_disponible"]
@@ -208,16 +215,11 @@ class fecha(models.Model):
 class cita(models.Model):
     # se hace un llamado a la tabla tipo_identificacion en vez de la persona
     id_persona = models.ForeignKey(
-        tipo_identificacion,
-        on_delete=models.CASCADE,
+        persona,
+        on_delete=models.DO_NOTHING,
     )
 
-    id_prueba = models.OneToOneField(
-        prueba,
-        on_delete=models.CASCADE
-    )
-
-    id_fecha_cita = models.OneToOneField(
+    id_fecha_cita = models.ForeignKey(
         fecha,
         on_delete=models.CASCADE,
         verbose_name="Fecha de la Cita"
@@ -229,7 +231,7 @@ class cita(models.Model):
         blank=False)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         ordering = ["id"]

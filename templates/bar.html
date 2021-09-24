@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand  navbar-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -22,28 +22,28 @@
         </li>
 
         <!-- User Settings Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown">
-                <i class="fas fa-user-cog"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">Ajustes de Usuario</span>
+{#        <li class="nav-item dropdown">#}
+{#            <a class="nav-link" data-toggle="dropdown">#}
+{#                <i class="fas fa-user-cog"></i>#}
+{#            </a>#}
+{#            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">#}
+{#                <span class="dropdown-item dropdown-header">Ajustes de Usuario</span>#}
                 {#          <div class="dropdown-divider"></div>#}
                 {#          <a href="#" class="dropdown-item">#}
                 {#            <i class="fas fa-envelope mr-2"></i> 4 new messages#}
                 {#            <span class="float-right text-muted text-sm">3 mins</span>#}
                 {#          </a>#}
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item dropdown-footer">Cerrar Sesión</a>
-            </div>
-        </li>
+{#                <div class="dropdown-divider"></div>#}
+{#                <a class="dropdown-item dropdown-footer">Cerrar Sesión</a>#}
+{#            </div>#}
+{#        </li>#}
 
     </ul>
 </nav>
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar content">
+<nav class="main-sidebar content">
     <!-- Brand Logo -->
     <div class="brand-link">
         <img src="{% static 'img/logo-dgev.png' %}" alt="DGEV Logo" class="brand-image img-circle elevation-3"
@@ -57,40 +57,40 @@
                  with font-awesome or any other icon font library -->
             <li class="nav-header">PANEL DE ADMINISTRACIÓN</li>
             <li class="nav-item">
-                <a href="{% url 'SedeTemplateView' %}" class="nav-link">
+                <a href="{% url 'SedeTemplateView' %}" class="nav-link text-white">
                     <i class="nav-icon fas fa-map-marker-alt"></i>
                     Sedes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'FechaTemplateView' %}" class="nav-link">
+                <a href="{% url 'FechaTemplateView' %}" class="nav-link text-white">
                     <i class="nav-icon fas fa-calendar-check"></i>
                     Fechas Disponibles
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
-                    Citas Matriculadas
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{% url 'PruebaTemplateView' %}" class="nav-link">
+                <a href="{% url 'PruebaTemplateView' %}" class="nav-link text-white">
                     <i class="nav-icon fas fa-id-card"></i>
                     Pruebas
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{% url 'ListPersonasView' %}" class="nav-link text-white">
                     <i class="nav-icon fas fa-users"></i>
                     Personas
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{% url 'ListCitasView' %}" class="nav-link text-white ">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    Citas Matriculadas
+                </a>
+            </li>
+
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
-    </div>
     <!-- /.sidebar -->
-</aside>
+</nav>
+

@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imprimir Cita</title>
+    <link rel="stylesheet" href="{% static 'css/print.css' %}">
+</head>
+<body>
+<nav>
+    <img src="{% static 'img/logo-dgev.png' %}" width="120vh" alt="DGEV LOGO">
+    <p>MINISTERIO DE OBRAS PÚBLICAS Y TRANSPORTES CONSEJO DE SEGURIDAD VIAL
+        DIRECCIÓN GENERAL DE EDUCACIÓN VIAL REPORTE DE MATRÍCULA</p>
+</nav>
+<table>
+    <tbody>
+    {% for detalle in detalles_cita %}
+        <tr>
+            <th>Id de Cita:</th>
+            <td>{{ detalle.id }}</td>
+        </tr>
+        <tr>
+            <th>Nombre:</th>
+            <td>{{ detalle.nombre }} {{ detalle.primer_apellido }} {{ detalle.segundo_apellido }}</td>
+        </tr>
+        <tr>
+            <th>Tipo de Identificación:</th>
+            <td>{{ detalle.tipo_identificacion_persona }}</td>
+        </tr>
+        <tr>
+            <th>Tipo de Prueba:</th>
+            <td>
+                {{ detalle.tipo_prueba }}
+            </td>
+        </tr>
+        {% if detalle.tipo_licencia %}
+            <tr>
+                <th>Tipo de Licencia:</th>
+                <td>{{ detalle.tipo_licencia }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th>Oficina:</th>
+            <td>
+                {{ detalle.ubicacion }}
+            </td>
+        </tr>
+        <tr>
+            <th>Fecha:</th>
+            <td>
+                {{ detalle.fecha_disponible }}
+            </td>
+        </tr>
+        <tr>
+            <th>Otras Indicaciones:</th>
+            <td>
+                {{ detalle.otras_indicaciones }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="info">
+    <p>Debe presentarse con su documento de identificación vigente y comprobante de pago con el que realizó la
+        matrícula,
+        ambos en buen estado. Caso contrario no podrá realizar la prueba.</p>
+    <p>Si por alguna razón no se presenta el día a la hora señalada, perderá la prueba, deberá volver a pagarla y
+        esperar
+        15 días naturales para volver a solicitarla.</p>
+    <p> Consulte los requisitos que debe aportar para la prueba en la pagina www.educacionvial.go.cr</p>
+</div>
+<script src="{% static '/lib/AdminLTE/plugins/jquery/jquery.min.js' %}"></script>
+<script>
+    $(function (){
+        print()
+    })
+</script>
+</body>
+</html>

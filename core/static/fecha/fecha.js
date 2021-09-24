@@ -162,7 +162,7 @@ function cargarPruebas() {
     });
 }
 
-function eliminar_fecha(){
+function eliminar_fecha() {
     $('.table_template_table tbody').on('click', 'button[rel="eliminar"]', function () {
         var tr = tbl.cell($(this).closest('td, li')).index();
         var data = tbl.row(tr.row).data();
@@ -182,6 +182,4 @@ function eliminar_fecha(){
 $(function () {
     cargarTabla();
     eliminar_fecha();
-
-
 });

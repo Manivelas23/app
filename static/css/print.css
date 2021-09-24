@@ -1,0 +1,38 @@
+*{
+    font-family: 'Arial';
+}
+nav {
+    min-height: 20vh;
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    align-items: center;
+}
+
+nav > p {
+    width: 43%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 15%;
+    font-size: 1pc;
+}
+
+table {
+    display: flex;
+    font-size: 0.8pc;
+    text-align: left;
+}
+
+
+th {
+    padding: 8px;
+    box-sizing: border-box;
+    width: 30vh;
+}
+
+.info {
+    margin-top: 7vh;
+    font-size: 0.8pc;
+    line-height: 5vh;
+}

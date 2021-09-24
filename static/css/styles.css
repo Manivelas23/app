@@ -1,12 +1,18 @@
 * {
     font-family: 'Mulish', sans-serif;
+    color: white;
 }
 
-.table {;
+
+.table {
     min-width: 100%;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
     padding: 2vh;
+    color: white;
+}
+.xdsoft_date > div, .xdsoft_label > span , .xdsoft_option{
+    color: black;
 }
 
 .dropdown-acciones {
@@ -14,14 +20,20 @@
 }
 
 .main-sidebar {
-    background: #272741;
-    color: mistyrose;
+    background: #0D47A0;
+    color: #F57C00;
+    min-height: 100%;
 }
 
-.nav-sidebar > nav-link> a {
-    color: mistyrose;
+.nav-item  {
+    color: white;
 }
 
-.btnCreate{
+.nav-item:hover {
+    background-color: rgba(90,164,227,0.22);
+}
+
+
+.btnCreate {
     margin-bottom: 4vh;
 }

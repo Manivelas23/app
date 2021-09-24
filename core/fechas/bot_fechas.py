@@ -12,6 +12,8 @@ class GeneradorCitas:
         try:
             data = data.dict()
 
+            print(data)
+
             fecha_inicio_parsed = datetime.datetime.strptime(data['fecha_inicio'], '%Y/%m/%d %H:%M')
             fecha_fin_parsed = datetime.datetime.strptime(data['fecha_fin'], '%Y/%m/%d %H:%M')
 
@@ -21,13 +23,13 @@ class GeneradorCitas:
                                                   fecha_inicio_parsed.hour,
                                                   fecha_inicio_parsed.minute)
 
-            self.id_prueba = data['select_prueba']
-
             self.fecha_fin = datetime.datetime(fecha_fin_parsed.year,
                                                fecha_fin_parsed.month,
                                                fecha_fin_parsed.day,
                                                fecha_fin_parsed.hour,
                                                fecha_fin_parsed.minute)
+
+            self.id_prueba = data['select_prueba']
 
             self.sedes = re.findall('[0-9]+', data['sedes'])
 
@@ -64,7 +66,8 @@ class GeneradorCitas:
                 if fechaInicio.isoweekday() not in finesSemana:
                     for i in range(7, 15):
                         hours_added = datetime.timedelta(hours=1)
-                        feriados = np.unique(np.array([datetime.datetime.combine(j, fechaInicio.time()) for j in feriados]))
+                        feriados = np.unique(
+                            np.array([datetime.datetime.combine(j, fechaInicio.time()) for j in feriados]))
                         if fechaInicio not in feriados:
                             if fechaInicio.hour == 14: hours_added = datetime.timedelta(hours=-7)
                             fechaInicio = fechaInicio + hours_added
@@ -87,4 +90,3 @@ class GeneradorCitas:
                 }
                 citas_dict_list.append(fecha_cita)
         return citas_dict_list
-

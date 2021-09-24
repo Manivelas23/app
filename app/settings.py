@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # lib
     'widget_tweaks',
+    'django_select2',
     # app
     'core.apps.CoreConfig',
 ]
@@ -67,7 +68,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'db3',
+#         'NAME': 'db4',
 #         'USER': 'root',
 #         'PASSWORD': 'Kittyvox2021',
 #         'HOST': '127.0.0.1',
@@ -75,19 +76,25 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #     },
 #
 # }
-
-# HOSTEADA
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_a774d6_cosevi',
-        'USER': 'a774d6_cosevi',
-        'PASSWORD': 'Kittyvox2021',
-        'HOST': 'MYSQL5025.site4now.net',
-        'PORT': '3306',
-    },
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# HOSTEADA
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'db_a774d6_cosevi',
+#         'USER': 'a774d6_cosevi',
+#         'PASSWORD': 'Kittyvox2021',
+#         'HOST': 'MYSQL5025.site4now.net',
+#         'PORT': '3306',
+#     },
+#
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

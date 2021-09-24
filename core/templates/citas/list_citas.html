@@ -1,0 +1,28 @@
+{% extends 'table.html' %}
+{% load  static %}
+{% load widget_tweaks %}
+
+{% block btnCreate %}
+    <a href="{% url 'CrearCitaView' %}" class="btn btn-primary">
+        {{ agregar_title }}
+    </a>
+{% endblock %}
+
+{% block table_head %}
+    {% for table_items in table_content %}
+        <th scope="col"> {{ table_items }}</th>
+    {% endfor %}
+    <th scope="col"> Acciones</th>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'citas/citas.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+    <script>
+        $(function () {
+            cargarTabla();
+        })
+    </script>
+{% endblock js %}
+
+

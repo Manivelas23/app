@@ -3,7 +3,7 @@ from django.db import models
 
 
 def getModelVerbosename():
-    return [name.verbose_name for name in prueba._meta.get_fields()[1:5] if hasattr(name, 'verbose_name')] + [
+    return [name.verbose_name for name in prueba._meta.get_fields()[1:4] if hasattr(name, 'verbose_name')] + [
         name.verbose_name for name in curso._meta.get_fields()[-3:] if hasattr(name, 'verbose_name')]
 
 

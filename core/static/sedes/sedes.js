@@ -28,7 +28,7 @@ function cargarTabla() {
             targets: [-1],
             class: 'text-center',
             render: function (data, type, row, meta) {
-                var botones = '<a rel="editar" class="btn btn-info btn-xs" >Modificar<span class="ml-1"></span><i class="far fa-edit"></i></a> ';
+                var botones = '<a rel="editar" class="btn bg-orange btn-xs text-white" >Modificar<span class="ml-1"></span><i class="far fa-edit"></i></a> ';
                 botones += '<a rel="eliminar" class="btn btn-danger btn-xs"> <i class="far fa-trash-alt"></i></a>';
                 return botones;
             }

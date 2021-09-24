@@ -68,6 +68,7 @@ class PruebaTemplateView(TemplateView):
         context['page_title'] = 'Listado Pruebas'
         context['page_info'] = 'Pruebas'
         context['agregar_title'] = "Agregar una Prueba"
+        print(getModelVerbosename())
         context['table_content'] = getModelVerbosename()
         context['form'] = [PruebaForm(), CursoForm()]
         return context

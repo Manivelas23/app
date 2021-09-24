@@ -40,7 +40,7 @@ class FechasListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Listado Fechas'
         context['page_info'] = 'Fechas Disponibles'
-        context['table_content'] =self.obj_extra.getModelVerbosename()
+        context['table_content'] = self.obj_extra.getModelVerbosename()
         context['agregar_title'] = "Agregar una Nueva Fecha"
         context['form'] = FechaForm()
         return context
@@ -70,7 +70,6 @@ class CreateFechaListView(TemplateView):
                     obj_fecha.id_prueba = prueba.objects.get(pk=int(fecha_cita['id_prueba']))
                     obj_fecha.id_sede = sede.objects.get(pk=int(fecha_cita['id_sede']))
                     obj_fecha.save()
-
 
             if request.POST['accion'] == 'cargar_pruebas':
                 data = getPruebaData()

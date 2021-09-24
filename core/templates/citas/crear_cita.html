@@ -1,0 +1,62 @@
+{% extends 'home.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body container-fluid">
+            <form action="." method="post" class="jumbotron-fluid d-grid gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" value="agregar" name="accion">
+                <input type="hidden" id="id" value="0" name="id">
+
+                <div class="col-12">
+                    <label class="form-label">Seleccione la fecha y el curso</label>
+                    <select id="select_fechas_citas" class="form-select select2" name="select_fecha_cita"
+                            aria-label="Default select example">
+                    </select>
+                </div>
+
+                {% for field in form_cita %}
+                    <label>{{ field.label }}</label>
+                    {% if field.name != 'otras_indicaciones' %}
+                        {{ field|add_class:'select2 form-control'|attr:'autocomplete:off' }}
+                    {% else %}
+                        {{ field|add_class:'form-control'|attr:'autocomplete:off' }}
+                    {% endif %}
+                {% endfor %}
+
+
+
+                <div class="card-body">
+                    <button type="submit" class="btn btn-md btn-primary submit-btn">Crear Cita</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+
+
+    <script src="{% static 'citas/citas.js' %}"></script>
+    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+    {{ form.media.js }}
+    <script type="application/javascript">
+        $(function () {
+            cargar_fechas()
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                var form = new FormData(this);
+
+
+                var ruta_destino = window.location.pathname
+                enviarConAjax(form, ruta_destino)
+            });
+
+
+        })
+    </script>
+{% endblock js %}

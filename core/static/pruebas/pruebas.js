@@ -29,13 +29,13 @@ function cargarTabla() {
             targets: [-1],
             class: 'text-center',
             render: function (data, type, row, meta) {
-                var botones = '<a rel="editar" class="btn btn-info btn-xs" >Modificar<span class="ml-1"></span><i class="far fa-edit"></i></a> ';
+                var botones = '<a rel="editar" class="btn bg-gradient-orange btn-xs" >Modificar<span class="ml-1"></span><i class="far fa-edit"></i></a> ';
                 botones += '<a rel="eliminar" class="btn btn-danger btn-xs"> <i class="far fa-trash-alt"></i></a>';
                 return botones;
             }
         }],
     })
-};
+}
 
 $(function () {
     cargarTabla();
@@ -59,7 +59,6 @@ $(function () {
         var tr = tbl.cell($(this).closest('td, li')).index();
         var data = tbl.row(tr.row).data();
         data = Object.assign(data, {'accion': 'eliminar'})
-        alert("borrando")
 
         var form = new FormData();
         for (var key in data) {

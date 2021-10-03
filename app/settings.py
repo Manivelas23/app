@@ -25,9 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # lib
     'widget_tweaks',
-    'django_select2',
     # app
-    'core.apps.CoreConfig',
+    # 'core.apps.CoreConfig',
+    'core'
 ]
 
 MIDDLEWARE = [

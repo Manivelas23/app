@@ -178,7 +178,7 @@ class sede(models.Model):
         verbose_name_plural = "Sedes"
 
 
-class fecha(models.Model):
+class Fecha(models.Model):
     fecha_disponible = models.DateTimeField(
         auto_now_add=False,
         null=False,
@@ -220,7 +220,7 @@ class cita(models.Model):
     )
 
     id_fecha_cita = models.ForeignKey(
-        fecha,
+        Fecha,
         on_delete=models.CASCADE,
         verbose_name="Fecha de la Cita"
     )

@@ -5,7 +5,7 @@ from django.views.generic import *
 from .forms import *
 from .extra import Extra
 from django.http import JsonResponse
-from core.pruebas.extra import getPruebaData
+from core.pruebas.extra import get_pruebas
 
 
 class CrearCitaView(TemplateView):

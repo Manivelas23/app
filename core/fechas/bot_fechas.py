@@ -12,8 +12,6 @@ class GeneradorCitas:
         try:
             data = data.dict()
 
-            print(data)
-
             fecha_inicio_parsed = datetime.datetime.strptime(data['fecha_inicio'], '%Y/%m/%d %H:%M')
             fecha_fin_parsed = datetime.datetime.strptime(data['fecha_fin'], '%Y/%m/%d %H:%M')
 

@@ -1,5 +1,5 @@
 from django.forms import *
-from core.models import cita, persona, fecha
+from core.models import cita, persona, Fecha
 
 
 class CitaForm(ModelForm):
@@ -11,7 +11,7 @@ class CitaForm(ModelForm):
             'id_persona': ModelChoiceField(queryset=persona.objects.all(), widget=Select(attrs={
                 'class': 'select2 form-control'
             })),
-            'id_fecha_cita': ModelChoiceField(queryset=fecha.objects.all(), widget=Select(attrs={
+            'id_fecha_cita': ModelChoiceField(queryset=Fecha.objects.all(), widget=Select(attrs={
                 'class': 'select2 form-control'
             })),
         }

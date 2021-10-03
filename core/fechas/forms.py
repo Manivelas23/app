@@ -1,14 +1,13 @@
 from django import forms
 from django.forms import ModelForm
-from tempus_dominus.widgets import DatePicker
 
-from core.models import fecha, prueba
+from core.models import Fecha, prueba
 from datetime import datetime
 
 
 class FechaForm(ModelForm):
     class Meta:
-        model = fecha
+        model = Fecha
         fields = '__all__'
         labels = {
             'id_prueba': 'Selecccione el Id de la Prueba'

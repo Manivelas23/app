@@ -1,21 +1,27 @@
 var tbl;
 
-function cargarTabla() {
-    tbl = $('.table_template_table').DataTable({
-        responsive: true,
-        autoWidth: true,
-        destroy: false,
-        deferRender: true,
-        fixedColumns: {
-            heightMatch: 'none'
+function cargar_tabla_fecha() {
+    tbl = $('#universal_datatable_table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": function (data, callback, settings) {
+
+            var current_url = window.location.pathname;
+            $.post(current_url, {
+                    limite: data.length,
+                    inicio: data.start,
+                    filtro: data.search.value,
+                    accion: "obtener_fechas"
+                }, function (res) {
+                    callback({
+                        recordsTotal: res.length,
+                        recordsFiltered: res.length,
+                        data: res.fechas
+                    })
+                }
+            )
         },
-        ajax: {
-            url: window.location.pathname,
-            type: 'POST',
-            data: {'accion': 'obtener_fechas'},
-            dataSrc: ""
-        },
-        columns: [
+        'columns': [
             {data: "id"},
             {data: "fecha_disponible"},
             {data: "ubicacion"},
@@ -42,27 +48,9 @@ function cargarTabla() {
                     </div>`
                 return content
             },
-        },
-            {
-                "orderable": false,
-                targets: [1],
-                class: 'text-center',
-                render: function (data, type, row, meta) {
-                    moment.lang('es', {
-                            months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
-                            monthsShort: 'Enero._Feb._Mar_Abr._May_Jun_Jul._Ago_Sept._Oct._Nov._Dec.'.split('_'),
-                            weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
-                            weekdaysShort: 'Dom._Lun._Mar._Mier._Jue._Vier._Sab.'.split('_'),
-                            weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_')
-                        }
-                    );
-                    return moment(data).format('LLLL')
-                },
-            }
-        ],
+        }]
     })
-};
-
+}
 
 function datetimepicker_settings() {
     $('#date_timepicker_start').datetimepicker({
@@ -134,7 +122,7 @@ function obtener_sedes() {
         seleccionar_sedes();
     });
     return sedes_seleccinadas;
-};
+}
 
 function cargarPruebas() {
     $.ajax({
@@ -180,6 +168,8 @@ function eliminar_fecha() {
 
 
 $(function () {
-    cargarTabla();
+    cargar_tabla_fecha();
     eliminar_fecha();
-});
+
+})
+

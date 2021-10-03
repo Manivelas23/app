@@ -2,18 +2,16 @@ from core.models import *
 from django.forms import *
 from django.forms import forms
 
-tipo_identificacion_choices = tipo_identificacion.objects.all().values_list("tipo", 'tipo')
 
-choice_list = []
+def get_tipo_identificaciones():
+    choice_list = []
+    try:
+        tipo_identificacion_choices = tipo_identificacion.objects.all().values_list("tipo", 'tipo')
 
-for i in tipo_identificacion_choices:
-    choice_list.append(i)
-tipo_identificacion_choices = tipo_identificacion.objects.all().values_list("tipo", 'tipo')
-
-choice_list = []
-
-for i in tipo_identificacion_choices:
-    choice_list.append(i)
+        choice_list = [i for i in tipo_identificacion_choices]
+    except Exception as e:
+        print(str(e))
+    return choice_list
 
 
 class PersonaForm(ModelForm):
@@ -23,11 +21,5 @@ class PersonaForm(ModelForm):
                   'tipo_identificacion_persona']
 
         widgets = {
-            "tipo_identificacion_persona": Select(choices=choice_list)
+            "tipo_identificacion_persona": Select(choices=get_tipo_identificaciones())
         }
-
-
-        widgets = {
-            "tipo_identificacion_persona": Select(choices=choice_list)
-        }
-

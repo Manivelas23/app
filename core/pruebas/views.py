@@ -23,7 +23,7 @@ class PruebaTemplateView(TemplateView):
         data = {}
         try:
             if request.POST['accion'] == 'obtener_pruebas':
-                data = getPruebaData()
+                data = get_pruebas()
 
             if request.POST['accion'] == 'agregar':
                 obj_curso = curso()

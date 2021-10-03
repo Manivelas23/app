@@ -146,7 +146,7 @@ class persona(models.Model):
 
 class sede(models.Model):
     ubicacion = models.CharField(
-        max_length=50,
+        max_length=60,
         null=False,
         blank=False,
         unique=True,

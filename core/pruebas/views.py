@@ -39,6 +39,7 @@ class PruebaTemplateView(TemplateView):
 
                 obj_curso.save()
                 obj_prueba.save()
+                data['modal'] = True
 
             if request.POST['accion'] == 'editar':
                 with transaction.atomic():
@@ -52,6 +53,7 @@ class PruebaTemplateView(TemplateView):
                     obj_prueba.tipo_prueba = str(request.POST['tipo_prueba']).upper()
                     obj_prueba.tipo_licencia = str(request.POST['tipo_licencia']).upper()
                     obj_prueba.save()
+                    data['modal'] = True
 
             if request.POST['accion'] == 'eliminar':
                 obj_prueba = prueba.objects.get(pk=request.POST['id'])
@@ -68,7 +70,6 @@ class PruebaTemplateView(TemplateView):
         context['page_title'] = 'Listado Pruebas'
         context['page_info'] = 'Pruebas'
         context['agregar_title'] = "Agregar una Prueba"
-        print(getModelVerbosename())
         context['table_content'] = getModelVerbosename()
         context['form'] = [PruebaForm(), CursoForm()]
         return context

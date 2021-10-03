@@ -29,9 +29,7 @@ class SedeListView(TemplateView):
         data = {}
         try:
             if request.POST['accion'] == 'obtener_sedes':
-                data = []
-                for i in sede.objects.all():
-                    data.append(i.toJSON())
+                data = [i.toJSON() for i in sede.objects.all()]
 
             if request.POST['accion'] == 'agregar':
                 obj_sede = sede()
@@ -40,6 +38,7 @@ class SedeListView(TemplateView):
                 obj_sede.cant_computadoras = request.POST['cant_computadoras']
                 obj_sede.activo = request.POST['activo']
                 obj_sede.save()
+                data['redirect'] = False
 
             if request.POST['accion'] == 'editar':
                 obj_sede = sede.objects.get(pk=request.POST['id'])
@@ -48,13 +47,17 @@ class SedeListView(TemplateView):
                 obj_sede.cant_computadoras = request.POST['cant_computadoras']
                 obj_sede.activo = request.POST['activo']
                 obj_sede.save()
+                data['redirect'] = False
 
             if request.POST['accion'] == 'eliminar':
                 obj_sede = sede.objects.get(pk=request.POST['id'])
                 obj_sede.delete()
+                data['redirect'] = False
+
 
         except Exception as e:
             data['error'] = str(e)
+        print(data)
         return JsonResponse(data, safe=False)
 
     def get_context_data(self, *, object_list=None, **kwargs):

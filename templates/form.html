@@ -1,5 +1,5 @@
 {% extends 'home.html' %}
-{% load  static %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block content %}
@@ -9,7 +9,7 @@
                 <h3 class="card-title">{{ page_title }}</h3>
             </div>
 
-                <table class=" table table-sm table_template_table table-Light table-bordered table-striped table-hover mydatatable ">
+            <table class=" table  table-bordered table-striped table-hover mydatatable ">
                 <thead class="bg-primary">
                 <tr>
                     {% for table_items in  table_content %}
@@ -50,8 +50,8 @@
                             {% endblock form %}
                         </div>
                         <div class="modal-footer position-relative">
-                            <button type="button" class="btn-sm btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn-sm btn-success submit-btn">Aceptar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary submit-btn">Continuar</button>
                         </div>
                     </form>
                 </div>

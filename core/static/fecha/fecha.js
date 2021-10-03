@@ -1,11 +1,13 @@
 var tbl;
 
-function cargar_tabla_fecha() {
+function cargarTabla() {
     tbl = $('#universal_datatable_table').DataTable({
+        responsive: true,
+        autoWidth: false,
+        deferRender: true,
         "processing": true,
         "serverSide": true,
         "ajax": function (data, callback, settings) {
-
             var current_url = window.location.pathname;
             $.post(current_url, {
                     limite: data.length,
@@ -168,7 +170,7 @@ function eliminar_fecha() {
 
 
 $(function () {
-    cargar_tabla_fecha();
+    cargarTabla();
     eliminar_fecha();
 
 })

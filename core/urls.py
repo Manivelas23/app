@@ -8,6 +8,7 @@ from core.citas.views import *
 urlpatterns = [
     # index
     path('', SedeListView.as_view(), name='SedeTemplateView'),
+
     # fechas
     path('generarfechas/', CreateFechaListView.as_view(), name='CreateFechaTemplateView'),
     path('fechas/', FechasListView.as_view(), name='FechaTemplateView'),

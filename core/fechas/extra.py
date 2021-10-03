@@ -11,23 +11,6 @@ class Extra:
                    name.verbose_name for name in curso._meta.get_fields()[2:] if hasattr(name, 'verbose_name')]
 
     # SQL
-    sql_query = """
-                       SELECT core_fecha.id, 
-                           core_fecha.fecha_disponible,
-                           core_sede.ubicacion,
-                           core_prueba.tipo_prueba, 
-                           core_prueba.tipo_licencia,
-                           core_curso.nomb_curso, 
-                           core_curso.tipo_curso, 
-                           core_curso.desc_curso
-                              FROM core_sede
-                              LEFT JOIN core_fecha
-                              ON  core_fecha.id_sede_id = core_sede.id
-                              LEFT JOIN core_prueba
-                              ON  core_prueba.id = core_fecha.id_prueba_id
-                              INNER JOIN core_curso
-                              ON core_curso.id = core_prueba.id_curso_id
-                              """
 
     def dictfetchall(self, cursor):
         "Return all rows from a cursor as a dict"
@@ -37,11 +20,50 @@ class Extra:
             for row in cursor.fetchall()
         ]
 
-    def get_fechas(self):
+    def sql_query_execution(self):
+        data = None
         try:
+            sql_query = """
+                                  SELECT core_fecha.id, 
+                                      core_fecha.fecha_disponible,
+                                      core_sede.ubicacion,
+                                      core_prueba.tipo_prueba, 
+                                      core_prueba.tipo_licencia,
+                                      core_curso.nomb_curso, 
+                                      core_curso.tipo_curso, 
+                                      core_curso.desc_curso
+                                         FROM core_sede
+                                         LEFT JOIN core_fecha
+                                         ON  core_fecha.id_sede_id = core_sede.id
+                                         LEFT JOIN core_prueba
+                                         ON  core_prueba.id = core_fecha.id_prueba_id
+                                         INNER JOIN core_curso
+                                         ON core_curso.id = core_prueba.id_curso_id
+                                         """
             with connection.cursor() as cursor:
-                cursor.execute(self.sql_query)
+                cursor.execute(sql_query)
                 row = self.dictfetchall(cursor)
+                data = row
         except Exception as e:
-            print(str(e))
-        return row
+            data['error'] = str(e)
+        return data
+
+    def get_fechas(self, request):
+        data = None
+        try:
+            row = self.sql_query_execution()
+
+            inicio_entradas, limite_entradas = int(request['inicio']), int(request['limite'])
+
+            fechas_paginadas = [valor for indice, valor in
+                                enumerate(row[inicio_entradas:inicio_entradas + limite_entradas],
+                                          inicio_entradas)]
+
+            data = {
+                'fechas': fechas_paginadas,
+                'length': len(row)
+            }
+
+        except Exception as e:
+            data['error'] = str(e)
+        return data

@@ -2,7 +2,6 @@ import time
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.timezone import make_aware
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import *
 from .forms import *
@@ -14,7 +13,7 @@ from .bot_fechas import GeneradorCitas
 from ..pruebas.extra import get_pruebas
 
 
-class FechasListView(TemplateView):
+class FechasListView(ListView):
     model = Fecha
     template_name = 'fechas/fecha.html'
     context_object_name = 'fechas'
@@ -29,27 +28,14 @@ class FechasListView(TemplateView):
 
         try:
             if request.POST['accion'] == 'obtener_fechas':
-                fechas_queryset = self.extra.get_fechas()
-
-                inicio_entradas = int(request.POST['inicio'])
-                limite_entradas = int(request.POST['limite'])
-
-                print(inicio_entradas, limite_entradas)
-
-                fechas_paginadas = [valor for indice, valor in
-                                    enumerate(fechas_queryset[inicio_entradas:inicio_entradas + limite_entradas],
-                                              inicio_entradas)]
-
-                data = {
-                    'fechas': fechas_paginadas,
-                    'length': len(fechas_queryset)
-                }
+                data = self.extra.get_fechas(request.POST)
                 # **********
 
-                if request.POST['accion'] == 'eliminar':
-                    fecha = Fecha.objects.get(pk=request.POST['id'])
+            if request.POST['accion'] == 'eliminar':
+                fecha = Fecha.objects.get(pk=request.POST['id'])
                 fecha.delete()
-                # **********
+                data['redirect'] = False
+            # **********
 
         except Exception as e:
             data['error'] = str(e)
@@ -70,7 +56,8 @@ class CreateFechaListView(TemplateView):
     template_name = 'fechas/create_fecha.html'
     context_object_name = 'fechas'
     form_class = FechaForm, PruebaForm
-    obj_extra = Extra()
+    generador_citas = GeneradorCitas
+    success_url = reverse_lazy('FechaTemplateView')
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -80,14 +67,9 @@ class CreateFechaListView(TemplateView):
         data = {}
         try:
             if request.POST['accion'] == 'agregar':
-                generadorCitas = GeneradorCitas(request.POST)
-                for fecha_cita in generadorCitas.generar_citas():
-                    fecha = Fecha()
-                    fecha_naive = fecha_cita['fecha_disponible']
-                    fecha.fecha_disponible = make_aware(fecha_naive)
-                    fecha.id_prueba = prueba.objects.get(pk=int(fecha_cita['id_prueba']))
-                    fecha.id_sede = sede.objects.get(pk=int(fecha_cita['id_sede']))
-                    fecha.save()
+                    self.generador_citas(request.POST).guardar_citas()
+                    data['redirect'] = True
+                    data['redirect_url'] = self.success_url
 
             if request.POST['accion'] == 'cargar_pruebas':
                 data = get_pruebas()

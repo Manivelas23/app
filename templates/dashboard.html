@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+{% include 'head.html' %}
+{% include 'bar.html' %}
+
+<body class="dark-mode">
+<div class="content-wrapper" style="min-height: 711px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Portal de Inicio</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Sistema</a></li>
+                        <li class="breadcrumb-item active">{{ page_info }}</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-4 col-4">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3><i class="nav-icon fas fa-map-marker-alt"></i> Sedes</h3>
+
+                            <p>Consultar toda la información referente a las <strong>sedes disponibles</strong> para las
+                                pruebas</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{% url 'SedeTemplateView' %}" class="small-box-footer">Ir <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-4">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3><i class="nav-icon fas fa-calendar-check"></i> Fechas Disponibles</h3>
+
+                            <p>Consultar toda la información referente a las <strong> fechas disponibles</strong> para
+                                las citas </p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{% url 'FechaTemplateView' %}" class="small-box-footer">Ir <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-4">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3><i class="nav-icon fas fa-id-card"></i> Pruebas</h3>
+
+                            <p>Consultar toda la información referente a las <strong> pruebas disponibles</strong> para
+                                las citas </p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{% url 'PruebaTemplateView' %}" class="small-box-footer">Ir <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-4">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3><i class="nav-icon fas fa-users"></i> Personas</h3>
+
+                            <p>Consultar toda la información referente a las <strong> personas registradas</strong> para
+                                las citas </p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{% url 'ListPersonasView' %}" class="small-box-footer">Ir <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-4">
+                    <!-- small box -->
+                    <div class="small-box bg-indigo">
+                        <div class="inner">
+                            <h3><i class="nav-icon fas fa-clipboard-list"></i> Citas Matrículadas</h3>
+
+                            <p>Consultar toda la información referente a las <strong> personas registradas</strong> para
+                                las citas </p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{% url 'ListCitasView' %}" class="small-box-footer">Ir <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+</body>
+
+{% include 'scripts.html' %}
+{% block js %} {% endblock js %}
+
+
+</body>
+</html>
+

@@ -1,57 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+{% include 'head.html' %}
 
-    <!-- bootstrap v5-->
-    <link rel="stylesheet" href="{% static 'lib/bootstrap-5.0.2-dist/css/bootstrap.min.css' %}">
-
-    <!-- AdminLT3 -->
-    <link rel="stylesheet" href="{% static 'lib/AdminLTE/css/adminlte.min.css' %}">
-    <link rel="stylesheet" href="{% static 'lib/AdminLTE/plugins/fontawesome-free/css/all.min.css' %}">
-
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-    <!-- DataTables -->
-    <link rel="stylesheet" type="text/css" href="{% static  'lib/DataTables/datatables.css' %}">
-
-    <!-- jAlert v4 -->
-    <link rel="stylesheet" type="text/css" href="{% static  'lib/jAlert/jAlert.css' %}">
-
-    <!-- Jquery DateTimePicker  -->
-    <link rel="stylesheet" href="{% static 'lib/jquery-dtpicker/jquery.datetimepicker.min.css' %}">
-
-    <!-- Select2  -->
-    <link rel="stylesheet" href="{% static 'lib/select2/select2.min.css' %}">
-
-
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>{{ page_title }}</title>
-
-
-</head>
 <body class="dark-mode">
 
 {% include 'bar.html' %}
+
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
-
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">{% block page_info %} {{ page_info }}{% endblock %}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="">Sistema</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'DashboardIndexView' %}">Sistema</a></li>
                         <li class="breadcrumb-item active"> {{ page_info }}</li>
                     </ol>
                 </div>
@@ -69,35 +35,9 @@
     </section>
 
 
-    <!-- Jquery -->
-    <script src="{% static '/lib/AdminLTE/plugins/jquery/jquery.min.js' %}"></script>
-
-    <!-- bootstrap v5-->
-    <script src="{% static 'lib/bootstrap-5.0.2-dist/js/bootstrap.min.js' %}"></script>
-    <script src="{% static '/lib/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    <!-- AdminLT3 -->
-    <script src="{% static 'lib/AdminLTE/js/adminlte.min.js' %}"></script>
-    <script type="text/javascript" charset="utf8" src="{% static '/lib/AdminLTE/js/adminlte.min.js' %}"></script>
-
-    <!-- DataTables -->
-    <script type="text/javascript" charset="utf8" src="{% static 'lib/DataTables/datatables.js' %}"></script>
-    <script src="http://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
-
-    <!-- jAlert -->
-    <script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert.min.js' %}"></script>
-    <script type="text/javascript" charset="utf8" src="{% static 'lib/jAlert/jAlert-functions.min.js' %}"></script>
-
-    <!-- Jquery DateTimePicker  -->
-    <script src="{% static 'lib/jquery-dtpicker/jquery.datetimepicker.full.js' %}"></script>
-
-    <!-- Select2  -->
-    <script src="{% static 'lib/select2/select2.min.js' %}"></script>
-
-
+    {% include 'scripts.html' %}
     {% block js %} {% endblock js %}
+
 
 </body>
 </html>

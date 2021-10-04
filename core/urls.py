@@ -1,13 +1,17 @@
-from django.urls import path,include
+from django.urls import path, include
 from core.sedes.views import *
 from core.fechas.views import *
 from core.pruebas.views import *
 from core.personas.views import *
 from core.citas.views import *
+from core.views import *
 
 urlpatterns = [
-    # index
-    path('', SedeListView.as_view(), name='SedeTemplateView'),
+    # dashboard index
+    path('', DashboardIndexView.as_view(), name='DashboardIndexView'),
+
+    # sedes
+    path('sedes/', SedeListView.as_view(), name='SedeTemplateView'),
 
     # fechas
     path('generarfechas/', CreateFechaListView.as_view(), name='CreateFechaTemplateView'),
@@ -23,8 +27,8 @@ urlpatterns = [
     path('eliminar/persona/<int:pk>', EliminarPersonaView.as_view(), name='EliminarPersonaView'),
 
     # citas
-    path('crear-cita/', CrearCitaView.as_view(), name='CrearCitaView'),
     path('citas/', ListCitasView.as_view(), name='ListCitasView'),
+    path('crear-cita/', CrearCitaView.as_view(), name='CrearCitaView'),
     path('citas/imprimir/<int:pk>', DetalleCitaView.as_view(), name='DetalleCitaView'),
 
 ]

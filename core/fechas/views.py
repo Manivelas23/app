@@ -1,4 +1,6 @@
 import time
+
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -20,6 +22,7 @@ class FechasListView(ListView):
     extra = Extra()
 
     @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -59,6 +62,7 @@ class CreateFechaListView(TemplateView):
     generador_citas = GeneradorCitas
     success_url = reverse_lazy('FechaTemplateView')
 
+    @method_decorator(login_required)
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -67,9 +71,9 @@ class CreateFechaListView(TemplateView):
         data = {}
         try:
             if request.POST['accion'] == 'agregar':
-                    self.generador_citas(request.POST).guardar_citas()
-                    data['redirect'] = True
-                    data['redirect_url'] = self.success_url
+                self.generador_citas(request.POST).guardar_citas()
+                data['redirect'] = True
+                data['redirect_url'] = self.success_url
 
             if request.POST['accion'] == 'cargar_pruebas':
                 data = get_pruebas()

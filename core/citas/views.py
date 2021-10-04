@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from core.models import cita
@@ -12,8 +14,10 @@ class CrearCitaView(TemplateView):
     model = cita
     template_name = 'citas/crear_cita.html'
     context_object_name = 'citas'
+    success_url = reverse_lazy('ListCitasView')
     obj_extra = Extra()
 
+    @method_decorator(login_required)
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -23,7 +27,6 @@ class CrearCitaView(TemplateView):
         try:
             if request.POST['accion'] == 'obtener_citas':
                 data = self.obj_extra.queryDataCita()
-                print(data)
 
             if request.POST['accion'] == 'agregar':
                 obj_cita = cita()
@@ -31,11 +34,13 @@ class CrearCitaView(TemplateView):
                 obj_persona = persona.objects.filter(pk=request.POST['id_persona'])
                 obj_cita.id_persona = obj_persona[0]
 
-                obj_fecha = fecha.objects.filter(pk=request.POST['select_fecha_cita'])
+                obj_fecha = Fecha.objects.filter(pk=request.POST['select_fecha_cita'])
                 obj_cita.id_fecha_cita = obj_fecha[0]
 
                 obj_cita.otras_indicaciones = request.POST['otras_indicaciones']
                 obj_cita.save()
+                data['redirect'] = True
+                data['redirect_url'] = self.success_url
 
             if request.POST['accion'] == 'cargar-fechas-select':
                 data = self.obj_extra.getFechaData()
@@ -58,6 +63,7 @@ class ListCitasView(TemplateView):
     context_object_name = 'citas'
     obj_extra = Extra()
 
+    @method_decorator(login_required)
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)

@@ -26,8 +26,11 @@ INSTALLED_APPS = [
     # lib
     'widget_tweaks',
     # app
-    # 'core.apps.CoreConfig',
-    'core'
+    'core',
+    # members
+    'members',
+    # user
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -129,10 +132,21 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# login
+LOGIN_REDIRECT_URL = '/dgev_admin/'
+LOGOUT_REDIRECT_URL = '/dgev_admin/sesiones/login/'
+LOGIN_URL = '/dgev_admin/sesiones/login/'
+
+# media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = (BASE_DIR / 'media/')
+
+# user
+AUTH_USER_MODEL = 'user.User'

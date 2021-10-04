@@ -1,0 +1,69 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.html' %}
+
+<style>
+    .login-box {
+        margin: 50vh auto;
+    }
+</style>
+
+<body class="dark-mode login-page" style="min-height: 466px;">
+
+
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <h1 class="h1"><b>DGEV </b>ADMIN</h1>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">{{ title }}</p>
+
+            <form action="." method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <div class="input-group mb-3">
+                    {{ form.username|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese su nombre de usuario' }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    {{ form.password|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese su contraseña' }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-12 d-grid gap-4">
+                        <button type="submit" class="btn btn-primary btn-md">{{ title }}</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+<!-- /.login-box -->
+
+{% include 'scripts.html' %}
+{% block js %} {% endblock js %}
+
+
+</body>
+</html>

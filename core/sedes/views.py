@@ -1,4 +1,5 @@
 import listview as listview
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -21,6 +22,7 @@ class SedeListView(TemplateView):
     simple_field_names = [field.name for field in sede._meta.get_fields()
                           if not isinstance(field, (models.ForeignKey, models.ManyToOneRel, models.ManyToManyRel))]
 
+    @method_decorator(login_required)
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -57,7 +59,6 @@ class SedeListView(TemplateView):
 
         except Exception as e:
             data['error'] = str(e)
-        print(data)
         return JsonResponse(data, safe=False)
 
     def get_context_data(self, *, object_list=None, **kwargs):

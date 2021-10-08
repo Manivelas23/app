@@ -48,6 +48,11 @@ function eliminar_fecha(id_evento) {
 function mostrar_calendario() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+            left: 'dayGridMonth,timeGridWeek,timeGridDay',
+            center: 'title',
+            right: 'prevYear,prev,next,nextYear'
+        },
         initialView: 'dayGridMonth',
         themeSystem: 'bootstrap',
         eventClick: function (info) {

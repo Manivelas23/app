@@ -68,8 +68,8 @@ class CreateFechaListView(LoginRequiredMixin, TemplateView):
 
             if request.POST['accion'] == 'agregar':
                 self.generador_citas(request.POST).guardar_citas()
-                data['redirect'] = False
-                # data['redirect_url'] = self.success_url
+                data['redirect'] = True
+                data['redirect_url'] = self.success_url
 
             if request.POST['accion'] == 'cargar_pruebas':
                 data = get_pruebas()

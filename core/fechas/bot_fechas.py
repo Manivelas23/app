@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import timedelta
 import datetime
 from dateutil.easter import *
@@ -44,7 +43,7 @@ class GeneradorCitas:
                               (12, 2, 2021)]]
 
         except Exception as e:
-            print(str(e))
+            print("err", str(e))
 
     def get_semana_santa(self):
         domingo_resurreccion = easter(2021)
@@ -72,7 +71,7 @@ class GeneradorCitas:
 
                 self.fecha_inicio += timedelta(days=1)
         except Exception as e:
-            print(str(e))
+            print("err", str(e))
         return fechas
 
     def generar_citas(self):
@@ -83,6 +82,7 @@ class GeneradorCitas:
             for fecha in fechas:
                 fecha_cita = {
                     "fecha_disponible": fecha,
+                    "fecha_fin": fecha +timedelta(hours=1),
                     "id_sede": sede,
                     "id_prueba": id_prueba
                 }
@@ -93,12 +93,16 @@ class GeneradorCitas:
         data = {}
         try:
             for fecha_cita in self.generar_citas():
+                print(fecha_cita)
                 fecha = Fecha()
                 fecha_naive = fecha_cita['fecha_disponible']
                 fecha.fecha_disponible = make_aware(fecha_naive)
+                fecha.fecha_fin = fecha_cita['fecha_fin']
                 fecha.id_prueba = prueba.objects.get(pk=int(fecha_cita['id_prueba']))
                 fecha.id_sede = sede.objects.get(pk=int(fecha_cita['id_sede']))
+                print(fecha)
                 fecha.save()
         except Exception as e:
             data['error'] = str(e)
+            print("err", str(e))
         return data

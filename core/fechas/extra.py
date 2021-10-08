@@ -11,7 +11,6 @@ class Extra:
                    name.verbose_name for name in curso._meta.get_fields()[2:] if hasattr(name, 'verbose_name')]
 
     # SQL
-
     def dictfetchall(self, cursor):
         "Return all rows from a cursor as a dict"
         columns = [col[0] for col in cursor.description]
@@ -25,13 +24,14 @@ class Extra:
         try:
             sql_query = """
                                   SELECT core_fecha.id, 
-                                      core_fecha.fecha_disponible,
-                                      core_sede.ubicacion,
-                                      core_prueba.tipo_prueba, 
-                                      core_prueba.tipo_licencia,
-                                      core_curso.nomb_curso, 
-                                      core_curso.tipo_curso, 
-                                      core_curso.desc_curso
+                                      core_fecha.fecha_disponible as start,
+                                      core_fecha.fecha_fin as end,
+                                      core_sede.ubicacion as UBICACION,
+                                      core_prueba.tipo_prueba as title, 
+                                      core_prueba.tipo_licencia as LICENCIA,
+                                      core_curso.nomb_curso AS CURSO, 
+                                      core_curso.tipo_curso AS TIPO , 
+                                      core_curso.desc_curso AS DESCRIPCION
                                          FROM core_sede
                                          LEFT JOIN core_fecha
                                          ON  core_fecha.id_sede_id = core_sede.id
@@ -53,14 +53,20 @@ class Extra:
         try:
             row = self.sql_query_execution()
 
-            inicio_entradas, limite_entradas = int(request['inicio']), int(request['limite'])
-
-            fechas_paginadas = [valor for indice, valor in
-                                enumerate(row[inicio_entradas:inicio_entradas + limite_entradas],
-                                          inicio_entradas)]
+            #
+            # inicio_entradas, limite_entradas = int(request['inicio']), int(request['limite'])
+            #
+            # fechas_paginadas = [valor for indice, valor in
+            #                     enumerate(row[inicio_entradas:inicio_entradas + limite_entradas],
+            #                               inicio_entradas)]
+            #
+            # data = {
+            #     'fechas': fechas_paginadas,
+            #     'length': len(row)
+            # }
 
             data = {
-                'fechas': fechas_paginadas,
+                'fechas': row,
                 'length': len(row)
             }
 

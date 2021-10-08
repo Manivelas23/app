@@ -15,7 +15,9 @@ urlpatterns = [
 
     # fechas
     path('generarfechas/', CreateFechaListView.as_view(), name='CreateFechaTemplateView'),
-    path('fechas/', FechasListView.as_view(), name='FechaTemplateView'),
+    path('fechas/', MostrarCalendarioView.as_view(), name='FechaTemplateView'),
+    # path('fechas/', FechasListView.as_view(), name='FechaTemplateView'),
+
 
     # pruebas
     path('pruebas/', PruebaTemplateView.as_view(), name='PruebaTemplateView'),

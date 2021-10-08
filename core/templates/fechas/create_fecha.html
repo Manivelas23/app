@@ -59,11 +59,11 @@
 {% block js %}
 
 
-    <script src="{% static 'fecha/fecha.js' %}"></script>
-    <script src="{% static 'js/enviar_ajax.js' %}"></script>
+    <script src="{% static 'fecha/crear_fechas.js' %}"></script>
     <script src="{% static 'js/enviar_ajax.js' %}"></script>
     <script type="application/javascript">
         $(function () {
+
 
             $('form').on('submit', function (e) {
                 e.preventDefault();
@@ -91,7 +91,6 @@
             obtener_sedes();
 
             seleccionar_sedes();
-
 
         })
     </script>

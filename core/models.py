@@ -186,6 +186,13 @@ class Fecha(models.Model):
         unique=False,
         verbose_name='Fecha Disponible'
     )
+    fecha_fin = models.DateTimeField(
+        auto_now_add=False,
+        null=False,
+        blank=False,
+        unique=False,
+        verbose_name='Fecha Fin'
+    )
 
     id_sede = models.ForeignKey(
         sede,

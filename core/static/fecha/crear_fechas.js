@@ -1,59 +1,3 @@
-var tbl;
-
-function cargarTabla() {
-    tbl = $('#universal_datatable_table').DataTable({
-        responsive: true,
-        autoWidth: false,
-        deferRender: true,
-        "processing": true,
-        "serverSide": true,
-        "ajax": function (data, callback, settings) {
-            var current_url = window.location.pathname;
-            $.post(current_url, {
-                    limite: data.length,
-                    inicio: data.start,
-                    filtro: data.search.value,
-                    accion: "obtener_fechas"
-                }, function (res) {
-                    callback({
-                        recordsTotal: res.length,
-                        recordsFiltered: res.length,
-                        data: res.fechas
-                    })
-                }
-            )
-        },
-        'columns': [
-            {data: "id"},
-            {data: "fecha_disponible"},
-            {data: "ubicacion"},
-            {data: "tipo_prueba"},
-            {data: "tipo_licencia"},
-            {data: "nomb_curso"},
-            {data: "tipo_curso"},
-            {data: "desc_curso"},
-            {data: null},
-        ],
-        columnDefs: [{
-            "orderable": false,
-            targets: [-1],
-            class: 'text-center',
-            render: function (data, type, row, meta) {
-                var content = `
-                    <div class="dropdown dropdown-acciones position-static">
-                      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       <i class="fas fa-ellipsis-v"></i>
-                      </button>
-                      <div class="dropdown-menu position-absolute" aria-labelledby="dropdownMenuButton">
-                       <button rel="eliminar" class="dropdown-item bg-danger"><i class="fas fa-minus-circle"></i> Eliminar</button> 
-                      </div>
-                    </div>`
-                return content
-            },
-        }]
-    })
-}
-
 function datetimepicker_settings() {
     $('#date_timepicker_start').datetimepicker({
         onShow: function () {
@@ -81,7 +25,6 @@ function cargarSedes() {
         data: {'accion': 'cargar_sedes'},
         dataType: 'json'
     }).done(function (data) {
-        console.log(data.error)
         if (!data.hasOwnProperty('error')) {
             for (var i in data) {
                 document.getElementById('sedes_container_fecha').innerHTML += `
@@ -151,27 +94,4 @@ function cargarPruebas() {
     }).always(function (data) {
     });
 }
-
-function eliminar_fecha() {
-    $('.table_template_table tbody').on('click', 'button[rel="eliminar"]', function () {
-        var tr = tbl.cell($(this).closest('td, li')).index();
-        var data = tbl.row(tr.row).data();
-        data = Object.assign(data, {'accion': 'eliminar'})
-
-        var form = new FormData();
-        for (var key in data) {
-            form.append(key, data[key]);
-        }
-
-        var ruta_destino = window.location.pathname
-        enviarConAjax(form, ruta_destino)
-    });
-}
-
-
-$(function () {
-    cargarTabla();
-    eliminar_fecha();
-
-})
 

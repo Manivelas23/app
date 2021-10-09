@@ -58,7 +58,6 @@ class PruebaTemplateView(TemplateView):
                     data['modal'] = True
 
             if request.POST['accion'] == 'eliminar':
-                print(request.POST)
                 obj_prueba = prueba.objects.get(pk=request.POST['id'])
                 obj_curso = curso.objects.get(pk=request.POST['id_curso'])
                 obj_prueba.delete()

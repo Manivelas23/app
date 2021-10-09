@@ -1,4 +1,4 @@
-*{
+* {
     font-family: 'Mulish', sans-serif;
 }
 
@@ -9,9 +9,6 @@
     text-align: center;
     padding: 2vh;
     color: white;
-}
-.xdsoft_date > div, .xdsoft_label > span , .xdsoft_option{
-    color: black;
 }
 
 .dropdown-acciones {
@@ -24,12 +21,12 @@
     min-height: 100%;
 }
 
-.nav-item  {
+.nav-item {
     color: white;
 }
 
 .nav-item:hover {
-    background-color: rgba(90,164,227,0.22);
+    background-color: rgba(90, 164, 227, 0.22);
 }
 
 

@@ -3,13 +3,6 @@ from django.db import connection
 
 
 class Extra:
-
-    # Table Headers Names
-    def get_table_header_names(self):
-        return [name.verbose_name for name in Fecha._meta.get_fields()[0:4] if hasattr(name, 'verbose_name')] + [
-            name.verbose_name for name in prueba._meta.get_fields()[3:5] if hasattr(name, 'verbose_name')] + [
-                   name.verbose_name for name in curso._meta.get_fields()[2:] if hasattr(name, 'verbose_name')]
-
     # SQL
     def dictfetchall(self, cursor):
         "Return all rows from a cursor as a dict"
@@ -62,8 +55,10 @@ class Extra:
     def get_fechas_filtradas(self, obj_filtro):
         data = {}
         try:
+            print("len", len(obj_filtro['sedes']))
+            print("obj", obj_filtro['sedes'])
             if len(obj_filtro['sedes']) > 1:
-                sql_query = """  
+                sql_query = """
                 SELECT core_fecha.id,
                    core_fecha.fecha_disponible as start,
                    core_fecha.fecha_fin        as  end,
@@ -81,8 +76,8 @@ class Extra:
                              INNER JOIN core_curso
                                 ON core_curso.id = core_prueba.id_curso_id
                     where core_prueba.id = %s
-                      and core_sede.id IN {a}
-                """.format(a=obj_filtro['sedes'])
+                      and core_sede.id IN {}
+                """.format(obj_filtro['sedes'])
             else:
                 sql_query = """  
                               SELECT core_fecha.id,
@@ -102,8 +97,8 @@ class Extra:
                                            INNER JOIN core_curso
                                               ON core_curso.id = core_prueba.id_curso_id
                                   where core_prueba.id = %s
-                                    and core_sede.id IN ({a})
-                              """.format(a=obj_filtro['sedes'])
+                                    and core_sede.id IN ({x})
+                              """.format(x=obj_filtro['sedes'][0])
             with connection.cursor() as cursor:
                 print(sql_query)
                 cursor.execute(sql_query, [obj_filtro['id_prueba']])

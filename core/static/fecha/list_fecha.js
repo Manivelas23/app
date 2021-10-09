@@ -176,7 +176,7 @@ function mostrar_calendario(data) {
         //         },
         //     },
         // ],
-        events:data,
+        events: data,
         loading: function (isLoading) {
             if (isLoading) {
                 $('#loading').show();
@@ -200,7 +200,8 @@ function filtrar_fechas_ajax(form, ruta_destino) {
             cache: false,
             dataType: 'json'
         }).done(function (data) {
-            mostrar_calendario(data)
+        mostrar_calendario(data)
+        console.log(data)
     })
         .fail(function (data) {
             alert("error");

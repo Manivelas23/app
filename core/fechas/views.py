@@ -57,13 +57,12 @@ class MostrarCalendarioView(TemplateView):
             print(data['error'])
         return JsonResponse(data, safe=False)
 
-        def get_context_data(self, *, object_list=None, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['page_title'] = 'Listado Fechas'
-            context['page_info'] = 'Fechas Disponibles'
-            context['table_content'] = self.extra.get_table_header_names()
-            context['agregar_title'] = "Agregar una Nueva Fecha"
-            return context
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Listado Fechas'
+        context['page_info'] = 'Fechas Disponibles'
+        context['agregar_title'] = "Agregar una Nueva Fecha"
+        return context
 
 
 class CreateFechaListView(LoginRequiredMixin, TemplateView):

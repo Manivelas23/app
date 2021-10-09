@@ -1,24 +1,4 @@
-function datetimepicker_settings() {
-    $('#date_timepicker_start').datetimepicker({
-        onShow: function () {
-            this.setOptions({
-                maxDate: $('#date_timepicker_end').val() ? $('#date_timepicker_end').val() : false
-            })
-        },
-        timepicker: true
-    });
-
-    $('#date_timepicker_end').datetimepicker({
-        onShow: function () {
-            this.setOptions({
-                minDate: $('#date_timepicker_start').val() ? $('#date_timepicker_start').val() : false
-            })
-        },
-        timepicker: true
-    });
-};
-
-function cargarSedes() {
+export function cargar_sedes() {
     $.ajax({
         url: window.location.pathname,
         type: 'POST',
@@ -42,8 +22,8 @@ function cargarSedes() {
     });
 }
 
-function seleccionar_sedes() {
-    activado = false
+export function seleccionar_sedes() {
+    var activado = false
     $('#flexCheckDefault').on('click', function () {
         if (activado) {
             $(".btn-check").prop('disabled', false);
@@ -59,7 +39,7 @@ function seleccionar_sedes() {
     return reset_sedes;
 }
 
-function obtener_sedes() {
+export function obtener_sedes_seleccionadas() {
     var sedes_seleccinadas;
     $("form").submit(function (event) {
         event.preventDefault();
@@ -69,7 +49,7 @@ function obtener_sedes() {
     return sedes_seleccinadas;
 }
 
-function cargarPruebas() {
+export function cargar_pruebas() {
     $.ajax({
         url: window.location.pathname,
         type: 'POST',
@@ -94,3 +74,5 @@ function cargarPruebas() {
     }).always(function (data) {
     });
 }
+
+

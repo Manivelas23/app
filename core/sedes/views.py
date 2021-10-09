@@ -1,16 +1,11 @@
-import listview as listview
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render
-
-# Create your views here.
-from django.urls import reverse_lazy
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView, CreateView
 from .forms import SedeForm
+from .extra import *
 from core.models import sede
-from django.db import models
 
 
 class SedeListView(TemplateView):
@@ -18,9 +13,6 @@ class SedeListView(TemplateView):
     template_name = 'sedes/sede.html'
     context_object_name = 'sedes'
     form_class = SedeForm
-
-    simple_field_names = [field.name for field in sede._meta.get_fields()
-                          if not isinstance(field, (models.ForeignKey, models.ManyToOneRel, models.ManyToManyRel))]
 
     @method_decorator(login_required)
     @method_decorator(csrf_exempt)
@@ -32,6 +24,7 @@ class SedeListView(TemplateView):
         try:
             if request.POST['accion'] == 'obtener_sedes':
                 data = [i.toJSON() for i in sede.objects.all()]
+                print(data)
 
             if request.POST['accion'] == 'agregar':
                 obj_sede = sede()
@@ -66,6 +59,6 @@ class SedeListView(TemplateView):
         context['page_title'] = 'Listado Sedes'
         context['page_info'] = 'Sedes'
         context['form'] = SedeForm()
-        context['table_content'] = self.simple_field_names
+        context['table_content'] = getModelVerbosename()
         context['agregar_title'] = "Agregar una Nueva Sede"
         return context

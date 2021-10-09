@@ -43,7 +43,7 @@ class curso(models.Model):
         unique=False,
         null=True,
         blank=True,
-        verbose_name="Descripcion de Curso"
+        verbose_name="Descripcion del Curso"
     )
 
     def __str__(self):

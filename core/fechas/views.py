@@ -30,11 +30,9 @@ class MostrarCalendarioView(TemplateView):
         try:
 
             if request.POST['accion'] == 'filtrar_fechas':
-                sedes_post = tuple(map(int, re.findall('[0-9]+', request.POST['sedes'])))
-
                 obj_filtro = {
                     'id_prueba': int(request.POST['select_prueba']),
-                    'sedes': sedes_post
+                    'sedes': tuple(map(int, re.findall('[0-9]+', request.POST['sedes'])))
                 }
 
                 data = self.extra.get_fechas_filtradas(obj_filtro)
@@ -46,8 +44,7 @@ class MostrarCalendarioView(TemplateView):
                 data = [i.toJSON() for i in sede.objects.all()]
 
             if request.POST['accion'] == 'eliminar':
-                fecha = Fecha.objects.get(pk=request.POST['id_evento'])
-                fecha.delete()
+                fecha = Fecha.objects.get(pk=request.POST['id_evento']).delete()
 
         except Exception as e:
             data['error'] = str(e)

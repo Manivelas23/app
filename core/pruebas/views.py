@@ -31,12 +31,12 @@ class PruebaTemplateView(TemplateView):
                 obj_curso = curso()
                 obj_prueba = prueba()
 
-                obj_curso.nomb_curso = str(request.POST['nomb_curso']).upper()
-                obj_curso.tipo_curso = str(request.POST['tipo_curso']).upper()
-                obj_curso.desc_curso = str(request.POST['desc_curso']).upper()
+                obj_curso.nomb_curso = str(request.POST['nomb_curso']).title()
+                obj_curso.tipo_curso = str(request.POST['tipo_curso']).title()
+                obj_curso.desc_curso = str(request.POST['desc_curso']).title()
 
-                obj_prueba.tipo_prueba = str(request.POST['tipo_prueba']).upper()
-                obj_prueba.tipo_licencia = str(request.POST['tipo_licencia']).upper()
+                obj_prueba.tipo_prueba = str(request.POST['tipo_prueba']).title()
+                obj_prueba.tipo_licencia = str(request.POST['tipo_licencia']).title()
                 obj_prueba.id_curso = obj_curso
 
                 obj_curso.save()
@@ -46,18 +46,19 @@ class PruebaTemplateView(TemplateView):
             if request.POST['accion'] == 'editar':
                 with transaction.atomic():
                     obj_curso = curso.objects.get(pk=request.POST['id_curso'])
-                    obj_curso.nomb_curso = str(request.POST['nomb_curso']).upper()
-                    obj_curso.tipo_curso = str(request.POST['tipo_curso']).upper()
-                    obj_curso.desc_curso = str(request.POST['desc_curso']).upper()
+                    obj_curso.nomb_curso = str(request.POST['nomb_curso']).title()
+                    obj_curso.tipo_curso = str(request.POST['tipo_curso']).title()
+                    obj_curso.desc_curso = str(request.POST['desc_curso']).title()
                     obj_curso.save()
 
                     obj_prueba = prueba.objects.get(pk=request.POST['id'])
-                    obj_prueba.tipo_prueba = str(request.POST['tipo_prueba']).upper()
-                    obj_prueba.tipo_licencia = str(request.POST['tipo_licencia']).upper()
+                    obj_prueba.tipo_prueba = str(request.POST['tipo_prueba']).title()
+                    obj_prueba.tipo_licencia = str(request.POST['tipo_licencia']).title()
                     obj_prueba.save()
                     data['modal'] = True
 
             if request.POST['accion'] == 'eliminar':
+                print(request.POST)
                 obj_prueba = prueba.objects.get(pk=request.POST['id'])
                 obj_curso = curso.objects.get(pk=request.POST['id_curso'])
                 obj_prueba.delete()

@@ -1,4 +1,4 @@
-function limpiar_modal() {
+function limpiar_modal_calendario() {
     $("#successModal .modal-title").html();
     $("#successModal .modal-ul").html('');
 }
@@ -125,7 +125,8 @@ function mostrar_calendario(fechas) {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-            left: 'dayGridMonth,timeGridWeek,timeGridDay',
+            locale: 'es',
+            left: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
             center: 'title',
             right: 'prevYear,prev,next,nextYear'
         },
@@ -135,14 +136,16 @@ function mostrar_calendario(fechas) {
             meridiem: false
         },
         initialView: 'dayGridMonth',
+        hiddenDays: [6, 0], //sabado y domingo
         themeSystem: 'bootstrap',
+        events: fechas,
         eventClick: function (info) {
 
             //obj data from backend
             var obj_evento = info.event;
 
 
-            limpiar_modal()
+            limpiar_modal_calendario()
             $("#successModal").modal("show");
 
             rellenar_modal(obj_evento, obj_evento.start);
@@ -161,9 +164,9 @@ function mostrar_calendario(fechas) {
             });
 
         },
-        events: fechas,
-        locale: 'cr',
     })
+    calendar.setOption('locale', 'es');
+    calendar.setOption('height', 'auto');
     calendar.render();
 }
 
@@ -178,7 +181,9 @@ function filtrar_fechas_ajax(form, ruta_destino) {
             cache: false,
             dataType: 'json'
         }).done(function (fechas) {
-        mostrar_calendario(fechas)
+        mostrar_calendario(fechas);
+        $('#panelsStayOpen-collapseOne').collapse()
+
     })
         .fail(function (data) {
             alert("error");

@@ -39,9 +39,6 @@ class MostrarCalendarioView(TemplateView):
 
                 data = self.extra.get_fechas_filtradas(obj_filtro)
 
-            if request.POST['accion'] == 'cargar_fechas':
-                data = self.extra.get_fechas()
-
             if request.POST['accion'] == 'cargar_pruebas':
                 data = get_pruebas()
 

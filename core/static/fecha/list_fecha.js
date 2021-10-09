@@ -121,7 +121,7 @@ function obtener_sedes() {
     return sedes_seleccinadas;
 }
 
-function mostrar_calendario(data) {
+function mostrar_calendario(fechas) {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
@@ -161,29 +161,7 @@ function mostrar_calendario(data) {
             });
 
         },
-        // eventSources: [
-        //     {
-        //         url: window.location.pathname,
-        //         format: 'json',
-        //         method: 'POST',
-        //         color: 'blue',
-        //         backgroundColor: 'lightblue',
-        //         extraParams: {
-        //             accion: 'cargar_fechas',
-        //         },
-        //         failure: function () {
-        //             alert('Ha ocurrido al cargar las fechas');
-        //         },
-        //     },
-        // ],
-        events: data,
-        loading: function (isLoading) {
-            if (isLoading) {
-                $('#loading').show();
-            } else {
-                $('#loading').hide();
-            }
-        },
+        events: fechas,
         locale: 'cr',
     })
     calendar.render();
@@ -199,9 +177,8 @@ function filtrar_fechas_ajax(form, ruta_destino) {
             contentType: false,
             cache: false,
             dataType: 'json'
-        }).done(function (data) {
-        mostrar_calendario(data)
-        console.log(data)
+        }).done(function (fechas) {
+        mostrar_calendario(fechas)
     })
         .fail(function (data) {
             alert("error");

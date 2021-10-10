@@ -93,14 +93,12 @@ class GeneradorCitas:
         data = {}
         try:
             for fecha_cita in self.generar_citas():
-                print(fecha_cita)
                 fecha = Fecha()
                 fecha_naive = fecha_cita['fecha_disponible']
                 fecha.fecha_disponible = make_aware(fecha_naive)
                 fecha.fecha_fin = fecha_cita['fecha_fin']
                 fecha.id_prueba = prueba.objects.get(pk=int(fecha_cita['id_prueba']))
                 fecha.id_sede = sede.objects.get(pk=int(fecha_cita['id_sede']))
-                print(fecha)
                 fecha.save()
         except Exception as e:
             data['error'] = str(e)

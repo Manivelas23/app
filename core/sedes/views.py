@@ -2,13 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import ListView
 from .forms import SedeForm
 from .extra import *
 from core.models import sede
 
 
-class SedeListView(TemplateView):
+class SedeListView(ListView):
     model = sede
     template_name = 'sedes/sede.html'
     context_object_name = 'sedes'
@@ -24,14 +24,14 @@ class SedeListView(TemplateView):
         try:
             if request.POST['accion'] == 'obtener_sedes':
                 data = [i.toJSON() for i in sede.objects.all()]
-                print(data)
 
             if request.POST['accion'] == 'agregar':
-                obj_sede = sede()
-                obj_sede.ubicacion = str(request.POST['ubicacion']).title()
-                obj_sede.cant_supervisores = request.POST['cant_supervisores']
-                obj_sede.cant_computadoras = request.POST['cant_computadoras']
-                obj_sede.activo = request.POST['activo']
+                obj_sede = sede(
+                    ubicacion=str(request.POST['ubicacion']).title(),
+                    cant_supervisores=int(request.POST['cant_supervisores']),
+                    cant_computadoras=int(request.POST['cant_computadoras']),
+                    activo=request.POST['activo']
+                )
                 obj_sede.save()
                 data['redirect'] = False
 

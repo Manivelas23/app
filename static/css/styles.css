@@ -15,8 +15,14 @@
     overflow: hidden;
 }
 
+#main_navbar {
+    background: #2b3e54;
+
+}
+
+
 .main-sidebar {
-    background: #0D47A0;
+    background: #010a0f;
     color: #F57C00;
     min-height: 100%;
 }
@@ -32,4 +38,8 @@
 
 .btnCreate {
     margin-bottom: 4vh;
+}
+
+.content-wrapper {
+    background: #edeced;
 }

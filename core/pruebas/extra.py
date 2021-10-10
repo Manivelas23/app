@@ -9,13 +9,18 @@ def getModelVerbosename():
 
 def get_pruebas():
     data = []
-    lista_pruebas, lista_cursos = [i.toJSON() for i in prueba.objects.all()], [i.toJSON() for i in curso.objects.all()]
-    lista_curso_pruebas = list(zip(lista_pruebas, lista_cursos))
-
-    dict_final_prueba = {}
-    for i, j in lista_curso_pruebas:
-        dict_final_prueba = i
-        j['id_curso'] = j.pop('id')
-        dict_final_prueba.update(j)
-        data.append(dict_final_prueba)
+    try:
+        pruebas_select_related = prueba.objects.select_related()
+        for i in pruebas_select_related:
+            dict_pruebas = {
+                'id': i.id,
+                'tipo_prueba': i.tipo_prueba,
+                'tipo_licencia': i.tipo_licencia,
+                'nomb_curso': i.id_curso.nomb_curso,
+                'tipo_curso': i.id_curso.tipo_curso,
+                'desc_curso': i.id_curso.desc_curso
+            }
+            data.append(dict_pruebas)
+    except Exception as e:
+        data['error'] = str(e)
     return data
